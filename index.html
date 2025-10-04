@@ -20,6 +20,7 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
     --btn-active: #6366f1;
     --text: #e2e8f0;
     --subtle: #94a3b8;
+    --line: #273244;
   }
   body {
     margin: 0;
@@ -30,22 +31,49 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
     flex-direction: column;
     height: 100vh;
   }
+
+  /* Header container becomes a details/summary */
   header {
     background: var(--header-bg);
-    padding: .75rem 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,.3);
+  }
+  details.picker {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: .5rem 1rem;
+  }
+
+  /* Summary (mobile dropdown button) */
+  details.picker > summary {
+    list-style: none;
+    cursor: pointer;
+    display: none;                   /* hidden by default (desktop) */
+    align-items: center;
+    justify-content: center;
+    gap: .6rem;
+    color: var(--subtle);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: .6rem .9rem;
+    background: #223047;
+    border: 1px solid var(--line);
+    border-radius: .6rem;
+    user-select: none;
+  }
+  /* the caret */
+  details.picker > summary::marker { content: ""; }
+  details.picker > summary .caret { opacity: .8; font-weight: 800; }
+
+  /* The button list */
+  .btns {
     display: flex;
     flex-wrap: wrap;
     gap: .5rem;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,.3);
+    padding: .5rem 0 .25rem;
   }
-  header h1 {
-    font-size: 1rem;
-    font-weight: 500;
-    margin: 0 .5rem 0 0;
-    color: var(--subtle);
-  }
+
   button {
     background: var(--btn-bg);
     color: var(--text);
@@ -54,7 +82,7 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
     border-radius: .5rem;
     padding: .4rem .9rem;
     cursor: pointer;
-    transition: background .2s, color .2s;
+    transition: background .2s, color .2s, transform .06s;
   }
   button:hover { background: var(--btn-hover); }
   button:focus, button:active {
@@ -62,36 +90,50 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
     color: #fff;
     outline: none;
   }
+
   iframe {
     flex: 1;
     width: 100%;
     border: none;
     background: #fff;
   }
+
+  /* ===== Mobile behavior (≤600px): show summary; collapse buttons unless open */
   @media (max-width: 600px) {
-    header { flex-direction: column; }
-    button { width: 100%; text-align: center; }
+    details.picker > summary { display: inline-flex; }
+    /* Hide the list when details is closed; show when open */
+    details.picker:not([open]) .btns { display: none; }
+    /* Make buttons full-width if you prefer stacked layout */
+    .btns button { width: 100%; text-align: center; }
   }
 </style>
 </head>
 <body>
   <header>
-    <h1>Select a sample layout:</h1>
-    <button onclick="switchSample('classic-business/index.html')">Classic Business</button>
-    <button onclick="switchSample('corporate-landing-cl/index.html')">Corporate Landing</button>
-    <button onclick="switchSample('agency-starter-cl/index.html')">Agency Starter</button>
-    <button onclick="switchSample('consulting-pro/index.html')">Consulting Professional</button>
-    <button onclick="switchSample('portfolio-pro/index.html')">Professional Portfolio</button>
-    <button onclick="switchSample('company-profile-pro/index.html')">Company Profile</button>
-    <button onclick="switchSample('startup-launch-md/index.html')">Startup Launch</button>
-    <button onclick="switchSample('tech-saas-md/index.html')">Tech SaaS</button>
-    <button onclick="switchSample('creative-showcase-md/index.html')">Creative Showcase</button>
-    <button onclick="switchSample('minimal-portfolio/index.html')">Minimal Portfolio</button>
-    <button onclick="switchSample('simple-landing/index.html')">Simple Landing Page</button>
-    <button onclick="switchSample('plain-blog/index.html')">Plain Blog</button>
-    <button onclick="switchSample('geocities-revival/index.html')">Geocities Revival</button>
-    <button onclick="switchSample('corporate-xp/index.html')">Corporate 2000s</button>
-    <button onclick="switchSample('pixel-arcade/index.html')">Pixel Arcade</button>
+    <details id="menu" class="picker">
+      <summary aria-controls="template-buttons" aria-expanded="false">
+        <span>Select a sample layout</span>
+        <span class="caret">▾</span>
+      </summary>
+
+      <div id="template-buttons" class="btns" role="group" aria-label="Template choices">
+        <button onclick="switchSample('classic-business/index.html')">Classic Business</button>
+        <button onclick="switchSample('corporate-landing-cl/index.html')">Corporate Landing</button>
+        <button onclick="switchSample('agency-starter-cl/index.html')">Agency Starter</button>
+        <button onclick="switchSample('consulting-pro/index.html')">Consulting Professional</button>
+        <button onclick="switchSample('portfolio-pro/index.html')">Professional Portfolio</button>
+        <button onclick="switchSample('company-profile-pro/index.html')">Company Profile</button>
+        <button onclick="switchSample('startup-launch-md/index.html')">Startup Launch</button>
+        <button onclick="switchSample('tech-saas-md/index.html')">Tech SaaS</button>
+        <button onclick="switchSample('creative-showcase-md/index.html')">Creative Showcase</button>
+        <button onclick="switchSample('minimal-portfolio/index.html')">Minimal Portfolio</button>
+        <button onclick="switchSample('simple-landing/index.html')">Simple Landing Page</button>
+        <button onclick="switchSample('plain-blog/index.html')">Plain Blog</button>
+        <button onclick="switchSample('geocities-revival/index.html')">Geocities Revival</button>
+        <button onclick="switchSample('corporate-xp/index.html')">Corporate 2000s</button>
+        <button onclick="switchSample('pixel-arcade/index.html')">Pixel Arcade</button>
+      </div>
+    </details>
   </header>
 
   <iframe id="preview" title="Welcome!"></iframe>
@@ -106,35 +148,45 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
      */
     function repoBase() {
       const { origin, pathname, protocol } = window.location;
-
-      // Split path and find the "Website-Templates" directory in it.
-      // This works whether you're at /Website-Templates/ or nested like /Website-Templates/subdir/.
       const parts = pathname.split('/').filter(Boolean);
       const i = parts.indexOf('Website-Templates');
-
       if (i !== -1) {
         const uptoRepo = parts.slice(0, i + 1).join('/') + '/';
-        // file:// has empty origin; use protocol+host fallback
         return origin ? `${origin}/${uptoRepo}` : `${protocol}//${uptoRepo}`;
       }
-
-      // Fallback: assume current directory is the repo root
-      // (useful if you opened index.html from inside the repo root)
       const base = document.baseURI || window.location.href;
       return base.endsWith('/') ? base : base + '/';
     }
 
     const BASE = repoBase();
-
     function resolveTemplate(path) {
-      // Ensure we always resolve against the repo root
       return new URL(path, BASE).href;
     }
 
     function switchSample(path) {
       document.getElementById('preview').src = resolveTemplate(path);
+      // If on mobile, keep the menu open only until selection; then auto-collapse:
+      if (window.matchMedia('(max-width: 600px)').matches) {
+        const menu = document.getElementById('menu');
+        if (menu.open) menu.open = false;
+      }
     }
 
+    // Keep details “always open” on desktop, “closed by default” on mobile
+    const menu = document.getElementById('menu');
+    function syncMenuOpen() {
+      const isMobile = window.matchMedia('(max-width: 600px)').matches;
+      menu.open = !isMobile;
+      // reflect state for a11y
+      menu.querySelector('summary')?.setAttribute('aria-expanded', String(menu.open));
+    }
+    window.addEventListener('resize', syncMenuOpen);
+    menu.addEventListener('toggle', () => {
+      menu.querySelector('summary')?.setAttribute('aria-expanded', String(menu.open));
+    });
+
+    // Init
+    syncMenuOpen();
     document.getElementById('preview').src = resolveTemplate('landing.html');
   </script>
 </body>
