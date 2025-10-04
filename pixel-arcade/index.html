@@ -5,3 +5,155 @@ Copyright (c) 2025 Nick Chiaravalle
 This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
 If a copy of the MPL was not distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/.
 -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Pixel Arcade • Insert Coin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Retro pixel font -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Decorative CRT overlay (scanlines + bloom) -->
+  <div class="crt" aria-hidden="true"></div>
+
+  <!-- =================== HEADER =================== -->
+  <header class="top" role="banner">
+    <div class="brand" aria-label="Pixel Arcade">
+      <span class="star" aria-hidden="true">✦</span>
+      <h1 class="logo">PIXEL<span>ARCADE</span></h1>
+      <span class="star" aria-hidden="true">✦</span>
+    </div>
+
+    <nav class="nav" role="navigation" aria-label="Main">
+      <a href="#games" class="nav-link">Games</a>
+      <a href="#tokens" class="nav-link">Tokens</a>
+      <a href="#highscores" class="nav-link">High Scores</a>
+      <a href="#about" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <!-- =================== MAIN =================== -->
+  <main id="content" role="main">
+    <!-- ===== HERO ===== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <div class="neon-ring" aria-hidden="true"></div>
+        <h2 id="hero-title" class="hero-title">INSERT <span class="coin">COIN</span> TO START</h2>
+        <p class="hero-sub">90s vibes • neon lights • pixel perfect</p>
+        <div class="hero-actions">
+          <button class="btn neon" id="playBtn" aria-describedby="play-hint">▶ PLAY</button>
+          <a class="btn ghost" href="#about">ABOUT</a>
+        </div>
+        <p id="play-hint" class="sr-only">Press Play to hear a retro coin sound and start the fun animations.</p>
+      </div>
+
+      <!-- marquee -->
+      <div class="marquee" aria-hidden="true">
+        <div class="track">
+          ★ New Cabinets Added • Neon Racer • Dungeon Dive • Stargrid • Turbo Pong ★
+          New Cabinets Added • Neon Racer • Dungeon Dive • Stargrid • Turbo Pong ★
+        </div>
+      </div>
+    </section>
+
+    <!-- Background starfield canvas -->
+    <canvas id="starfield" aria-hidden="true"></canvas>
+
+    <!-- ===== GAME CARDS ===== -->
+    <section id="games" class="grid" aria-label="Featured games">
+      <!-- Card 1 -->
+      <article class="card" aria-labelledby="game-stargrid">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 16 16" width="32" height="32"><path d="M7 1h2v2h2v2h2v2h-2v2H9v2H7v-2H5V7H3V5h2V3h2V1z" class="pix"/></svg>
+        </div>
+        <h3 id="game-stargrid">Stargrid</h3>
+        <p>Vector shoot-’em-up with hyperdrive combo chains.</p>
+        <a href="#" class="link">Play demo</a>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="card" aria-labelledby="game-dungeon">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 16 16" width="32" height="32"><path d="M9 1l2 2-2 2-1-1-2 2 1 1-6 6 2 2 6-6 1 1 2-2-1-1 2-2-2-2z" class="pix"/></svg>
+        </div>
+        <h3 id="game-dungeon">Dungeon Dive</h3>
+        <p>Procedural pixel crawler with chunky crits and hidden keys.</p>
+        <a href="#" class="link">Play demo</a>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="card" aria-labelledby="game-racer">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 16 16" width="32" height="32"><path d="M2 9h1l1-2h6l1 2h1v3h-1a2 2 0 1 1-4 0H7a2 2 0 1 1-4 0H2V9z" class="pix"/></svg>
+        </div>
+        <h3 id="game-racer">Neon Racer</h3>
+        <p>Outrun-style synth highways and drifting glow trails.</p>
+        <a href="#" class="link">Play demo</a>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="card" aria-labelledby="game-pong">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 16 16" width="32" height="32">
+            <rect x="2" y="7" width="2" height="6" class="pix"></rect>
+            <rect x="12" y="3" width="2" height="6" class="pix"></rect>
+            <rect x="8" y="7" width="2" height="2" class="pix"></rect>
+          </svg>
+        </div>
+        <h3 id="game-pong">Turbo Pong</h3>
+        <p>Classic volley with turbo boosts and warp portals.</p>
+        <a href="#" class="link">Play demo</a>
+      </article>
+    </section>
+
+    <!-- ===== TOKENS ===== -->
+    <section id="tokens" class="cta" aria-labelledby="tokens-title">
+      <div class="cta-inner">
+        <h3 id="tokens-title">Grab Some Tokens</h3>
+        <p>Unlock skins, extra lives, and cabinet sound packs.</p>
+        <div class="cta-actions">
+          <button class="btn neon" id="tokenBtn">INSERT TOKEN</button>
+          <button class="btn ghost">GIFTSHOP</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SCORES ===== -->
+    <section id="highscores" class="scores" aria-labelledby="scores-title">
+      <h3 id="scores-title">High Scores</h3>
+      <ul class="score-list" role="list">
+        <li><span>AAA</span><b>999,990</b></li>
+        <li><span>CHV</span><b>888,880</b></li>
+        <li><span>NCK</span><b>777,770</b></li>
+        <li><span>JAX</span><b>666,660</b></li>
+      </ul>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about" class="about" aria-labelledby="about-title">
+      <h3 id="about-title">About This Template</h3>
+      <p>
+        <strong>Pixel Arcade</strong> is a retro-styled HTML/CSS/JS starter with neon glow, pixel icons,
+        scanlines, a CRT sheen, and a starfield backdrop. Built for that late-90s/early-2000s arcade feel.
+      </p>
+      <ul>
+        <li>Pixel font via Google Fonts (<em>Press Start 2P</em>).</li>
+        <li>Pure CSS neon borders + flicker + marquee.</li>
+        <li>Canvas starfield (tiny, no deps).</li>
+        <li>MPL-2.0 licensed — customize freely, keep headers on redistributed files.</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- =================== FOOTER =================== -->
+  <footer class="foot" role="contentinfo">
+    <div>© 2025 Pixel Arcade • <a href="../..//LICENSE">MPL-2.0</a></div>
+    <div class="tiny">Made for the Website-Templates picker.</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
