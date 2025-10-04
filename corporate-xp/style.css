@@ -1,0 +1,217 @@
+/*
+SPDX-License-Identifier: MPL-2.0
+Copyright (c) 2025 Nick Chiaravalle
+
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+If a copy of the MPL was not distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/.
+*/
+:root{
+  /* XP-era palette */
+  --xp-blue-top:#0a64ad;
+  --xp-blue-bot:#58a0e0;
+  --xp-blue-dark:#083e74;
+  --xp-blue-lite:#8cc3ef;
+
+  --ink:#1a1a1a;
+  --ink-dim:#3b3b3b;
+  --bg:#e7edf6;           /* corporate light steel */
+  --card:#f8fafc;         /* light card */
+  --line:#c9d5e6;         /* beveled border */
+  --shadow:rgba(0,0,0,.12);
+  --silver:#e5e9f2;
+  --link:#0b5fa5;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0; padding:0}
+body{
+  background: linear-gradient(180deg,#f5f8fe,#e8eef8 60%,#e0e7f2);
+  color:var(--ink);
+  font: 14px/1.4 Verdana, Tahoma, Segoe UI, Arial, sans-serif;
+}
+
+/* utility bar */
+.utility{
+  background: linear-gradient(180deg,#f7fbff,#e9f3ff);
+  border-bottom:1px solid var(--line);
+  font-size:12px;
+}
+.wrap{
+  width:960px; max-width:calc(100% - 24px);
+  margin:0 auto; padding:0 6px;
+}
+.util-left{float:left; padding:.35rem 0; color:#4b5563}
+.util-right{float:right; padding:.35rem 0}
+.util-right a{color:var(--link); text-decoration:none}
+.util-right a:hover{text-decoration:underline}
+.utility::after{content:""; display:block; clear:both}
+
+/* header */
+.header{
+  background:
+    linear-gradient(180deg, var(--xp-blue-top), var(--xp-blue-bot));
+  border-bottom:1px solid var(--xp-blue-lite);
+  box-shadow:0 6px 16px var(--shadow);
+  color:#fff;
+}
+.head-row{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 0;
+}
+.brand .logo{
+  font-weight:700; font-size:22px; letter-spacing:.2px;
+  text-shadow:0 1px 0 rgba(0,0,0,.25);
+}
+.brand .logo span{color:#dff1ff}
+.brand .tag{font-size:12px; opacity:.9}
+
+.search{display:flex; gap:6px}
+.search input{
+  border:1px solid #2c79b7;
+  background:#f8fbff; color:#0a1f33;
+  padding:6px 8px; border-radius:3px;
+}
+.search .btn{
+  background:linear-gradient(180deg,#e4f1ff,#b9daf8);
+  border:1px solid #8cb5e2; color:#0a2540;
+  padding:6px 10px; border-radius:3px; font-weight:700; cursor:pointer;
+}
+
+/* tabs */
+.tabs{
+  background: linear-gradient(180deg, #eef6ff, #d9e8fb);
+  border-top:1px solid #7eb4e6;
+  border-bottom:1px solid var(--line);
+}
+.tabs-row{display:flex; gap:2px}
+.tab{
+  display:inline-block; padding:10px 14px;
+  color:#0a2750; text-decoration:none; font-weight:700;
+  background: linear-gradient(180deg, #ffffff, #e7f0fb);
+  border:1px solid #b6ccec;
+  border-bottom-color:#7aa3d9;
+  border-radius:6px 6px 0 0;
+  box-shadow: inset 0 1px 0 #fff, 0 1px 0 #fff;
+}
+.tab:hover{background:linear-gradient(180deg,#ffffff,#f0f6ff)}
+.tab.active{
+  background:linear-gradient(180deg,#fff,#f8fcff);
+  border-bottom-color:#fff;
+}
+
+/* hero */
+.hero{
+  background:linear-gradient(180deg,#f5f9ff,#e9f1fb);
+  border-bottom:1px solid var(--line);
+}
+.hero-inner{
+  display:flex; gap:18px; align-items:center;
+  padding:22px 0;
+}
+.hero-img{
+  display:block; width:320px; height:auto;
+  border:1px solid #b6ccec; background:#fff; box-shadow:0 6px 16px var(--shadow);
+}
+.hero-copy h1{
+  margin:0 0 8px; font-size:24px; color:#0a2750; letter-spacing:.2px;
+  text-shadow:0 1px 0 rgba(255,255,255,.8);
+}
+.hero-copy p{margin:0 0 12px; color:#1e2c44}
+.hero-actions .btn{margin-right:8px}
+
+/* buttons */
+.btn{
+  display:inline-block; text-decoration:none; cursor:pointer;
+  padding:8px 12px; border-radius:4px; font-weight:700;
+  border:1px solid #9fbbe4; color:#0a2750;
+  background:linear-gradient(180deg,#ffffff,#eaf2fd);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.8), 0 2px 0 rgba(255,255,255,.6);
+}
+.btn:hover{background:linear-gradient(180deg,#ffffff,#f4f8ff)}
+.btn.primary{
+  border-color:#7aa3d9; color:#06203e;
+  background:linear-gradient(180deg,#dbeeff,#bcd9f7);
+}
+
+/* main */
+.main{
+  display:grid; grid-template-columns: 1fr 300px; gap:18px;
+  padding:18px 0;
+}
+.section-title{
+  margin:2px 0 10px;
+  font-size:18px; color:#0a2750; border-bottom:1px solid var(--line); padding-bottom:6px;
+}
+
+/* cards row */
+.cards{
+  display:grid; grid-template-columns: repeat(3, 1fr); gap:12px;
+}
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  box-shadow:0 2px 8px var(--shadow), inset 0 1px 0 #fff;
+  border-radius:6px; padding:12px;
+}
+.card h3{margin:0 0 6px; font-size:15px; color:#0b2a4f}
+.card p{margin:0 0 8px; color:#28364a}
+.link{color:var(--link); text-decoration:none; font-weight:700}
+.link:hover{text-decoration:underline}
+
+/* news list */
+.news{margin:8px 0 0; padding:0 0 0 18px}
+.news .date{font-weight:700; color:#0b2a4f}
+
+/* sidebar */
+.sidebar{display:flex; flex-direction:column; gap:12px}
+.sidebox{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:6px; padding:10px;
+  box-shadow:0 2px 8px var(--shadow), inset 0 1px 0 #fff;
+}
+.sidebox h3{margin:0 0 6px; font-size:14px; color:#0b2a4f}
+.sidebox ul{list-style:square; margin:0; padding-left:18px}
+.sidebox a{color:var(--link); text-decoration:none}
+.sidebox a:hover{text-decoration:underline}
+
+.cta{
+  background:linear-gradient(180deg,#fff,#f3f8ff);
+  border:1px solid #b6ccec; border-radius:6px; padding:12px;
+  box-shadow:0 6px 16px var(--shadow), inset 0 1px 0 #fff;
+  text-align:center;
+}
+.cta-title{font-weight:700; color:#0b2a4f; margin-bottom:6px}
+.btn.full{display:block; width:100%; text-align:center}
+
+/* footer */
+.footer{
+  background: linear-gradient(180deg,#eaf2fd,#dfe9f8);
+  border-top:1px solid #b6ccec;
+  margin-top:8px;
+  box-shadow: inset 0 1px 0 #fff;
+}
+.foot-grid{
+  display:grid; grid-template-columns: repeat(4, 1fr); gap:12px;
+  padding:14px 0;
+}
+.foot-h{
+  font-variant: small-caps; letter-spacing:.5px;
+  color:#0b2a4f; margin-bottom:6px
+}
+.foot-col ul{list-style:none; margin:0; padding:0}
+.foot-col li{margin:4px 0}
+.foot-col a{color:#0a2750; text-decoration:none}
+.foot-col a:hover{text-decoration:underline}
+.foot-copy{
+  border-top:1px solid var(--line);
+  padding:10px 0; font-size:12px; color:#374151;
+}
+
+/* simple responsiveness */
+@media (max-width: 980px){
+  .wrap{max-width:calc(100% - 16px)}
+  .hero-inner{flex-direction:column; align-items:flex-start}
+  .main{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr; gap:10px}
+}
