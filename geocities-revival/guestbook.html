@@ -1,0 +1,62 @@
+<!--
+SPDX-License-Identifier: MPL-2.0
+Copyright (c) 2025 Nick Chiaravalle
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+If a copy of the MPL was not distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Guestbook • Geocities Revival</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <div class="subtitle">SIGN MY</div>
+      <h1>★ GUESTBOOK ★</h1>
+    </div>
+
+    <div class="nav">
+      <table><tr>
+        <td><a href="index.html">Home</a></td>
+        <td><a href="about.html">About Me</a></td>
+        <td><a href="links.html">Cool Links</a></td>
+        <td><a href="guestbook.html">Guestbook</a></td>
+      </tr></table>
+    </div>
+
+    <div class="content">
+      <form id="guestForm" class="guest-form">
+        <label><b>Name</b><br><input name="name" placeholder="Your cool handle"></label><br>
+        <label><b>Message</b><br><textarea name="message" rows="4" placeholder="Leave a radical note..."></textarea></label><br>
+        <button type="submit">Sign Guestbook</button>
+      </form>
+
+      <hr class="rule">
+
+      <h3>Entries</h3>
+      <div id="guestList" aria-live="polite"></div>
+
+      <div class="box" style="margin-top:10px;">
+        Page Views: <span id="hitCounter" class="counter">000000</span>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div>Part of the Totally Real WebRing™</div>
+      <div class="webring">
+        <a href="about.html">« Prev Site</a>
+        <a href="index.html">Random</a>
+        <a href="links.html">Next Site »</a>
+      </div>
+      <div style="margin-top:8px;">
+        <small>© 2025 • <a href="../..//LICENSE">MPL-2.0</a></small>
+      </div>
+    </div>
+  </div>
+<script src="script.js"></script>
+</body>
+</html>
