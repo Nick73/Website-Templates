@@ -1,0 +1,664 @@
+<!--
+SPDX-License-Identifier: MPL-2.0
+Copyright (c) 2025 Nick Chiaravalle
+
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+If a copy of the MPL was not distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>QuickStart Web Templates • Catalog & Theme Picker</title>
+<meta name="description" content="A clean, professional, retro-styled catalog and live picker for HTML/CSS website starter templates. MPL-2.0." />
+<style>
+  /* ====== Design tokens ====== */
+  :root{
+    --bg: #0f172a;            /* deep slate */
+    --bg-elev: #131b30;       /* card bg */
+    --panel: #1b2540;         /* sidebar/header */
+    --ink: #e2e8f0;           /* primary text */
+    --ink-dim:#97a4bb;        /* secondary text */
+    --line: #263453;          /* separators */
+    --brand: #7dd3fc;         /* cyan accent */
+    --brand-2: #a78bfa;       /* purple accent */
+    --ok: #22d3ee;
+
+    --radius: 14px;
+    --radius-pixel: 10px;     /* for pixel corners */
+    --shadow: 0 8px 30px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+    color: var(--ink);
+    background: radial-gradient(1200px 700px at 20% -10%, #162043 0%, transparent 60%),
+                radial-gradient(1200px 800px at 120% 10%, #1a2a54 0%, transparent 60%),
+                var(--bg);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+  }
+
+  /* ====== Header ====== */
+  header {
+    background: linear-gradient(180deg, var(--panel), #162241);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 6px 14px rgba(0,0,0,.25);
+  }
+  .wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: .9rem 1rem;
+  }
+  .topbar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .title {
+    display: flex; align-items: center; gap: .75rem;
+  }
+  .logo-dot {
+    width: 14px; height: 14px;
+    background: conic-gradient(from 180deg, var(--brand), var(--brand-2), var(--brand));
+    border-radius: 3px;
+    box-shadow: 0 0 18px rgba(125,211,252,.6);
+  }
+  h1 {
+    font-size: clamp(1rem, 1.2rem + .5vw, 1.35rem);
+    margin: 0; font-weight: 700; letter-spacing: .2px;
+  }
+  .badge {
+    padding: .25rem .5rem; border: 1px solid var(--line);
+    color: var(--ink-dim);
+    border-radius: .5rem; font-size: .8rem;
+    background: linear-gradient(180deg, #182342, #141d36);
+  }
+
+  /* ====== Layout ====== */
+  .layout {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 360px 1fr;
+    align-items: stretch;
+    max-width: 1200px;
+    width: 100%;
+    margin: 1rem auto;
+    padding: 0 1rem 1rem;
+  }
+  @media (max-width: 980px){
+    .layout { grid-template-columns: 1fr; }
+  }
+
+  /* ====== Sidebar (catalog filters) ====== */
+  .panel {
+    background: linear-gradient(180deg, #14203f, var(--bg-elev));
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    position: sticky;
+    top: 1rem;
+    align-self: start;
+  }
+  .panel h2 {
+    margin: 0 0 .6rem; font-size: 1rem; color: var(--ink);
+  }
+  .panel p {
+    margin: 0 0 1rem; color: var(--ink-dim); line-height: 1.4;
+  }
+  .search {
+    display: flex; gap: .5rem; margin: .75rem 0 1rem;
+  }
+  .search input {
+    flex: 1; background: #0e1732; color: var(--ink);
+    border: 1px solid var(--line); padding: .6rem .7rem;
+    border-radius: .6rem;
+  }
+  .chiprow { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .chip {
+    padding: .35rem .6rem; border: 1px solid var(--line);
+    border-radius: .6rem; color: var(--ink-dim);
+    background: linear-gradient(180deg,#172243,#111a35);
+    cursor: pointer; user-select: none;
+    transition: transform .08s ease, border-color .2s ease, color .2s ease;
+    font-size: .85rem;
+  }
+  .chip:hover { transform: translateY(-1px); }
+  .chip.active {
+    color: #0b1226;
+    background: linear-gradient(180deg, var(--brand), #67e8f9);
+    border-color: #67e8f9;
+  }
+
+  /* ====== Catalog / Cards ====== */
+  .catalog {
+    display: grid;
+    gap: 1rem;
+  }
+  .hintline {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--brand), transparent);
+    opacity: .35; margin: .3rem 0 .8rem;
+  }
+
+  .card {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 1rem;
+    padding: .9rem;
+    background: linear-gradient(180deg, var(--bg-elev), #0f1a34 70%);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  @media (max-width: 640px){
+    .card { grid-template-columns: 1fr; }
+  }
+  .thumb {
+    height: 120px; border-radius: .6rem; border: 1px solid var(--line);
+    background:
+      linear-gradient(135deg, rgba(167,139,250,.2), rgba(125,211,252,.15)),
+      repeating-linear-gradient( 45deg, rgba(255,255,255,.04) 0 2px, transparent 2px 6px),
+      linear-gradient(180deg, #172243, #0f1a34);
+    display: grid; place-items: center; color: var(--ink-dim); font-size: .85rem;
+  }
+  .thumb small { opacity: .8; }
+  .card h3 { margin: 0; font-size: 1.05rem; }
+  .meta { color: var(--ink-dim); font-size: .9rem; margin: .15rem 0 .5rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: .35rem; margin: .4rem 0 .6rem; }
+  .tag {
+    font-size: .75rem; padding: .25rem .45rem; border-radius: .4rem;
+    border: 1px solid var(--line); color: var(--ink-dim);
+    background: #0d1831;
+  }
+  .actions { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .btn {
+    appearance: none; border: 1px solid var(--line); background: #132045; color: var(--ink);
+    padding: .5rem .75rem; border-radius: .6rem; cursor: pointer;
+    transition: transform .08s ease, border-color .2s ease, background .2s ease;
+    font-weight: 600;
+  }
+  .btn:hover { transform: translateY(-1px); border-color: var(--brand); }
+  .btn.primary {
+    background: linear-gradient(180deg, #1b2b56, #1a2a54);
+    border-color: #3a4f7e;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 0 0 0 rgba(34,211,238,0);
+  }
+  .btn.primary:focus, .btn.primary:active {
+    outline: none; border-color: var(--ok);
+    box-shadow: 0 0 0 3px rgba(34,211,238,.25);
+  }
+
+  /* ====== Live Preview ====== */
+  .preview {
+    margin-top: .75rem;
+    background: linear-gradient(180deg, #0e1730, #0b142a);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .preview-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: .6rem .75rem; border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, #121d3b, #101a34);
+  }
+  .preview-title { color: var(--ink-dim); font-size: .92rem; }
+  .controls { display: flex; gap: .4rem; flex-wrap: wrap; }
+  .select {
+    background: #0e1732; color: var(--ink);
+    border: 1px solid var(--line); padding: .45rem .6rem; border-radius: .5rem;
+  }
+  iframe {
+    display: block; width: 100%; height: min(70vh, 720px);
+    border: none; background: #fff;
+  }
+
+  /* ====== Footer ====== */
+  footer {
+    border-top: 1px solid var(--line);
+    background: linear-gradient(180deg, #111a33, #0f172a);
+  }
+  .foot {
+    max-width: 1200px; margin: 0 auto; padding: 1rem;
+    color: var(--ink-dim); font-size: .9rem;
+    display: flex; align-items: center; justify-content: space-between; gap: .75rem; flex-wrap: wrap;
+  }
+  .foot a { color: var(--brand); text-decoration: none; }
+  .foot a:hover { text-decoration: underline; }
+
+  /* ====== Retro pixel-corner accent ====== */
+  .pixel-corners {
+    /* simple faux pixel corner using box-shadow layers */
+    position: relative;
+    border-radius: 0;
+  }
+  .pixel-corners:before, .pixel-corners:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    box-shadow:
+      0 0 0 1px var(--line),
+      0 0 0 2px rgba(255,255,255,.02);
+    border-radius: 0;
+    mask:
+      linear-gradient(#000 0 0) subtract,
+      radial-gradient(12px, #000 98%, transparent) top left,
+      radial-gradient(12px, #000 98%, transparent) top right,
+      radial-gradient(12px, #000 98%, transparent) bottom left,
+      radial-gradient(12px, #000 98%, transparent) bottom right;
+    -webkit-mask:
+      linear-gradient(#000 0 0) subtract,
+      radial-gradient(12px, #000 98%, transparent) top left,
+      radial-gradient(12px, #000 98%, transparent) top right,
+      radial-gradient(12px, #000 98%, transparent) bottom left,
+      radial-gradient(12px, #000 98%, transparent) bottom right;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap topbar">
+    <div class="title">
+      <span class="logo-dot" aria-hidden="true"></span>
+      <h1>QuickStart Web Templates</h1>
+    </div>
+    <span class="badge">MPL-2.0 • Plain HTML/CSS • Client-ready</span>
+  </div>
+</header>
+
+<main class="layout">
+  <!-- SIDE PANEL -->
+  <aside class="panel pixel-corners" aria-label="Filters and search">
+    <h2>Catalog</h2>
+    <p>Browse ready-to-customize starters. Pick a template to preview instantly.</p>
+
+    <div class="search">
+      <input id="search" type="search" placeholder="Search templates (e.g., SaaS, blog, retro)..." aria-label="Search templates" />
+    </div>
+
+    <h2 style="margin-top:.5rem;">Categories</h2>
+    <div id="chips" class="chiprow" role="listbox" aria-label="Filter by category">
+      <div class="chip active" data-filter="all" role="option" aria-selected="true">All</div>
+      <div class="chip" data-filter="Classic" role="option">Classic</div>
+      <div class="chip" data-filter="Professional" role="option">Professional</div>
+      <div class="chip" data-filter="Modern" role="option">Modern</div>
+      <div class="chip" data-filter="Minimal" role="option">Minimal</div>
+      <div class="chip" data-filter="Retro" role="option">Retro</div>
+    </div>
+
+    <div class="hintline" aria-hidden="true"></div>
+    <p style="margin-top:.6rem">
+      Tip: Use <strong>Preview</strong> to load it in the live viewer. Open a template
+      folder directly to start customizing.
+    </p>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <section>
+    <div class="catalog" id="catalog" aria-live="polite">
+
+      <!-- CLASSIC -->
+      <div class="card pixel-corners" data-name="Classic Business" data-cat="Classic">
+        <div class="thumb"><small>classic-business/</small></div>
+        <div>
+          <h3>Classic Business</h3>
+          <div class="meta">Simple header, hero, services, and contact — ideal for small local businesses.</div>
+          <div class="tags">
+            <span class="tag">Classic</span><span class="tag">Multi-section</span><span class="tag">Hero + Services</span>
+          </div>
+          <div class="actions">
+            <button class="btn primary" data-path="classic-business/index.html">Preview</button>
+            <a class="btn" href="classic-business/" target="_blank" rel="noopener">Open Folder</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card pixel-corners" data-name="Corporate Landing" data-cat="Classic">
+        <div class="thumb"><small>corporate-landing-cl/</small></div>
+        <div>
+          <h3>Corporate Landing</h3>
+          <div class="meta">Clean hero, trust badges, and a primary CTA. Great for single-page intros.</div>
+          <div class="tags">
+            <span class="tag">Classic</span><span class="tag">Landing</span><span class="tag">CTA</span>
+          </div>
+          <div class="actions">
+            <button class="btn primary" data-path="corporate-landing-cl/index.html">Preview</button>
+            <a class="btn" href="corporate-landing-cl/" target="_blank" rel="noopener">Open Folder</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card pixel-corners" data-name="Agency Starter" data-cat="Classic">
+        <div class="thumb"><small>agency-starter-cl/</small></div>
+        <div>
+          <h3>Agency Starter</h3>
+          <div class="meta">Hero + about + services + contact — the dependable starter for client agencies.</div>
+          <div class="tags">
+            <span class="tag">Classic</span><span class="tag">Agency</span><span class="tag">Multi-section</span>
+          </div>
+          <div class="actions">
+            <button class="btn primary" data-path="agency-starter-cl/index.html">Preview</button>
+            <a class="btn" href="agency-starter-cl/" target="_blank" rel="noopener">Open Folder</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROFESSIONAL -->
+      <div class="card pixel-corners" data-name="Consulting Professional" data-cat="Professional">
+        <div class="thumb"><small>consulting-pro/</small></div>
+        <div>
+          <h3>Consulting Professional</h3>
+          <div class="meta">Trust-first layout with clear value props, case studies, and contact.</div>
+          <div class="tags">
+            <span class="tag">Professional</span><span class="tag">Consulting</span><span class="tag">Case Studies</span>
+          </div>
+          <div class="actions">
+            <button class="btn primary" data-path="consulting-pro/index.html">Preview</button>
+            <a class="btn" href="consulting-pro/" target="_blank" rel="noopener">Open Folder</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card pixel-corners" data-name="Professional Portfolio" data-cat="Professional">
+        <div class="thumb"><small>portfolio-pro/</small></div>
+        <div>
+          <h3>Professional Portfolio</h3>
+          <div class="meta">Project grid, highlights, and contact for showcasing client work.</div>
+          <div class="tags">
+            <span class="tag">Professional</span><span class="tag">Portfolio</span><span class="tag">Grid</span>
+          </div>
+          <div class="actions">
+            <button class="btn primary" data-path="portfolio-pro/index.html">Preview</button>
+            <a class="btn" href="portfolio-pro/" target="_blank" rel="noopener">Open Folder</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card pixel-corners" data-name="Company Profile" data-cat="Professional">
+        <div class="thumb"><small>company-profile-pro/</small></div>
+        <div>
+          <h3>Company Profile</h3>
+          <div class="meta">About, team bios, social proof, and contact for established businesses.</div>
+          <div class="tags">
+            <span class="tag">Professional</span><span class="tag">Team</span><span class="tag">Social Proof</span>
+          </div>
+          <div class="actions">
+            <button class="btn primary" data-path="company-profile-pro/index.html">Preview</button>
+            <a class="btn" href="company-profile-pro/" target="_blank" rel="noopener">Open Folder</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODERN -->
+      <div class="card pixel-corners" data-name="Startup Launch" data-cat="Modern">
+        <div class="thumb"><small>startup-launch-md/</small></div>
+        <div>
+          <h3>Startup Launch</h3>
+          <div class="meta">Bold hero, gradient blocks, and sharp CTA for product launches.</div>
+          <div class="tags">
+            <span class="tag">Modern</span><span class="tag">SaaS</span><span class="tag">Launch</span>
+          </div>
+          <div class="actions">
+            <button class="btn primary" data-path="startup-launch-md/index.html">Preview</button>
+            <a class="btn" href="startup-launch-md/" target="_blank" rel="noopener">Open Folder</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card pixel-corners" data-name="Tech SaaS" data-cat="Modern">
+        <div class="thumb"><small>tech-saas-md/</small></div>
+        <div>
+          <h3>Tech SaaS</h3>
+          <div class="meta">Cards, subtle motion, and pricing tables — a crisp product site.</div>
+          <div class="tags">
+            <span class="tag">Modern</span><span class="tag">Pricing</span><span class="tag">Cards</span>
+          </div>
+          <div class="actions">
+            <button class="btn primary" data-path="tech-saas-md/index.html">Preview</button>
+            <a class="btn" href="tech-saas-md/" target="_blank" rel="noopener">Open Folder</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card pixel-corners" data-name="Creative Showcase" data-cat="Modern">
+        <div class="thumb"><small>creative-showcase-md/</small></div>
+        <div>
+          <h3>Creative Showcase</h3>
+          <div class="meta">Bold color blocking, overlapping imagery, and portfolio features.</div>
+          <div class="tags">
+            <span class="tag">Modern</span><span class="tag">Creative</span><span class="tag">Showcase</span>
+          </div>
+          <div class="actions">
+            <button class="btn primary" data-path="creative-showcase-md/index.html">Preview</button>
+            <a class="btn" href="creative-showcase-md/" target="_blank" rel="noopener">Open Folder</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- MINIMAL -->
+      <div class="card pixel-corners" data-name="Minimal Portfolio" data-cat="Minimal">
+        <div class="thumb"><small>minimal-portfolio/</small></div>
+        <div>
+          <h3>Minimal Portfolio</h3>
+          <div class="meta">Whitespace, sharp type, and focus on the work itself.</div>
+          <div class="tags">
+            <span class="tag">Minimal</span><span class="tag">Portfolio</span><span class="tag">Clean</span>
+          </div>
+          <div class="actions">
+            <button class="btn primary" data-path="minimal-portfolio/index.html">Preview</button>
+            <a class="btn" href="minimal-portfolio/" target="_blank" rel="noopener">Open Folder</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card pixel-corners" data-name="Simple Landing Page" data-cat="Minimal">
+        <div class="thumb"><small>simple-landing/</small></div>
+        <div>
+          <h3>Simple Landing Page</h3>
+          <div class="meta">Single column, large headline, straight to the point.</div>
+          <div class="tags">
+            <span class="tag">Minimal</span><span class="tag">Landing</span><span class="tag">Fast</span>
+          </div>
+          <div class="actions">
+            <button class="btn primary" data-path="simple-landing/index.html">Preview</button>
+            <a class="btn" href="simple-landing/" target="_blank" rel="noopener">Open Folder</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card pixel-corners" data-name="Plain Blog" data-cat="Minimal">
+        <div class="thumb"><small>plain-blog/</small></div>
+        <div>
+          <h3>Plain Blog</h3>
+          <div class="meta">Text-first, muted palette, classic reading rhythm.</div>
+          <div class="tags">
+            <span class="tag">Minimal</span><span class="tag">Blog</span><span class="tag">Typography</span>
+          </div>
+          <div class="actions">
+            <button class="btn primary" data-path="plain-blog/index.html">Preview</button>
+            <a class="btn" href="plain-blog/" target="_blank" rel="noopener">Open Folder</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- RETRO -->
+      <div class="card pixel-corners" data-name="Geocities Revival" data-cat="Retro">
+        <div class="thumb"><small>geocities-revival/</small></div>
+        <div>
+          <h3>Geocities Revival</h3>
+          <div class="meta">Hand-coded 90s vibes: tiled bg, bold links, and fun extras.</div>
+          <div class="tags">
+            <span class="tag">Retro</span><span class="tag">90s</span><span class="tag">Nostalgia</span>
+          </div>
+          <div class="actions">
+            <button class="btn primary" data-path="geocities-revival/index.html">Preview</button>
+            <a class="btn" href="geocities-revival/" target="_blank" rel="noopener">Open Folder</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card pixel-corners" data-name="Corporate 2000s" data-cat="Retro">
+        <div class="thumb"><small>corporate-xp/</small></div>
+        <div>
+          <h3>Corporate 2000s</h3>
+          <div class="meta">XP-era gradients and beveled touches — early-2000s corporate feel.</div>
+          <div class="tags">
+            <span class="tag">Retro</span><span class="tag">2000s</span><span class="tag">Bevels</span>
+          </div>
+          <div class="actions">
+            <button class="btn primary" data-path="corporate-xp/index.html">Preview</button>
+            <a class="btn" href="corporate-xp/" target="_blank" rel="noopener">Open Folder</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card pixel-corners" data-name="Pixel Arcade" data-cat="Retro">
+        <div class="thumb"><small>pixel-arcade/</small></div>
+        <div>
+          <h3>Pixel Arcade</h3>
+          <div class="meta">Pixel fonts, neon vibes, and grid accents for playful projects.</div>
+          <div class="tags">
+            <span class="tag">Retro</span><span class="tag">Arcade</span><span class="tag">Neon</span>
+          </div>
+          <div class="actions">
+            <button class="btn primary" data-path="pixel-arcade/index.html">Preview</button>
+            <a class="btn" href="pixel-arcade/" target="_blank" rel="noopener">Open Folder</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- LIVE PREVIEW -->
+    <div class="preview pixel-corners" id="previewBox" style="margin-top:1rem;">
+      <div class="preview-head">
+        <div class="preview-title" id="previewLabel">Preview: <strong>Corporate 2000s</strong></div>
+        <div class="controls">
+          <select id="quickSelect" class="select" aria-label="Quick select template">
+            <optgroup label="Classic">
+              <option value="classic-business/index.html">Classic Business</option>
+              <option value="corporate-landing-cl/index.html">Corporate Landing</option>
+              <option value="agency-starter-cl/index.html">Agency Starter</option>
+            </optgroup>
+            <optgroup label="Professional">
+              <option value="consulting-pro/index.html">Consulting Professional</option>
+              <option value="portfolio-pro/index.html">Professional Portfolio</option>
+              <option value="company-profile-pro/index.html">Company Profile</option>
+            </optgroup>
+            <optgroup label="Modern">
+              <option value="startup-launch-md/index.html">Startup Launch</option>
+              <option value="tech-saas-md/index.html">Tech SaaS</option>
+              <option value="creative-showcase-md/index.html">Creative Showcase</option>
+            </optgroup>
+            <optgroup label="Minimal">
+              <option value="minimal-portfolio/index.html">Minimal Portfolio</option>
+              <option value="simple-landing/index.html">Simple Landing Page</option>
+              <option value="plain-blog/index.html">Plain Blog</option>
+            </optgroup>
+            <optgroup label="Retro">
+              <option value="geocities-revival/index.html">Geocities Revival</option>
+              <option value="corporate-xp/index.html" selected>Corporate 2000s</option>
+              <option value="pixel-arcade/index.html">Pixel Arcade</option>
+            </optgroup>
+          </select>
+          <button class="btn" id="openNew">Open in New Tab</button>
+        </div>
+      </div>
+      <iframe id="preview" src="corporate-xp/index.html" title="Template preview"></iframe>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot">
+    <div>
+      <strong>License:</strong> MPL-2.0 — you may use these templates commercially; changes to these files that you redistribute must remain MPL-2.0 with attribution.
+    </div>
+    <div>
+      <a href="./LICENSE">View LICENSE</a> • <a href="./CONTRIBUTING.md">Contribute</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // --- Filtering & search ---
+  const chips = document.querySelectorAll('.chip');
+  const catalog = document.getElementById('catalog');
+  const cards = Array.from(catalog.querySelectorAll('.card'));
+  const search = document.getElementById('search');
+
+  function applyFilters(){
+    const active = document.querySelector('.chip.active')?.dataset.filter || 'all';
+    const q = (search.value || '').trim().toLowerCase();
+
+    cards.forEach(card => {
+      const cat = card.dataset.cat;
+      const name = (card.dataset.name || '').toLowerCase();
+      const text = card.innerText.toLowerCase();
+      const matchCat = (active === 'all') || (cat === active);
+      const matchSearch = !q || name.includes(q) || text.includes(q);
+      card.style.display = (matchCat && matchSearch) ? '' : 'none';
+    });
+  }
+
+  chips.forEach(c => c.addEventListener('click', () => {
+    chips.forEach(x => x.classList.remove('active'));
+    c.classList.add('active');
+    applyFilters();
+  }));
+  search.addEventListener('input', applyFilters);
+
+  // --- Preview wiring ---
+  const iframe = document.getElementById('preview');
+  const label = document.getElementById('previewLabel');
+  const quickSelect = document.getElementById('quickSelect');
+  const openNew = document.getElementById('openNew');
+
+  function setPreview(path, name){
+    iframe.src = path;
+    label.innerHTML = `Preview: <strong>${name || path}</strong>`;
+    quickSelect.value = path;
+    // Scroll preview into view on small screens
+    document.getElementById('previewBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // Buttons in cards
+  document.querySelectorAll('.btn.primary[data-path]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const path = btn.getAttribute('data-path');
+      const name = btn.closest('.card').dataset.name || path;
+      setPreview(path, name);
+    });
+  });
+
+  // Quick select dropdown
+  quickSelect.addEventListener('change', e => {
+    const path = e.target.value;
+    const name = [...document.querySelectorAll('.card')].find(c =>
+      c.querySelector(`[data-path="${path}"]`))?.dataset.name || path;
+    setPreview(path, name);
+  });
+
+  // Open current in new tab
+  openNew.addEventListener('click', () => {
+    const url = iframe.getAttribute('src') || '';
+    if (url) window.open(url, '_blank', 'noopener');
+  });
+
+  // Initial filter pass
+  applyFilters();
+</script>
+</body>
+</html>

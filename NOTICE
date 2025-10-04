@@ -1,0 +1,14 @@
+QuickStart Web Templates — NOTICE
+
+Copyright (c) 2025 Nick Chiaravalle
+Licensed under the Mozilla Public License, v. 2.0 (MPL-2.0).
+If a copy of the MPL was not distributed with this file, you can obtain one at https://mozilla.org/MPL/2.0/
+
+This repository contains original HTML/CSS/JS templates by the author above.
+
+Third-party components (examples—replace or remove if not used):
+- Inter font (SIL OFL 1.1) — https://fonts.google.com/specimen/Inter
+- Normalize.css (MIT) — https://necolas.github.io/normalize.css/
+
+Attribution guidelines:
+- When redistributing modified versions of *these files*, keep the MPL header in those files and include this NOTICE (or equivalent) in your distribution.

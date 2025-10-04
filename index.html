@@ -1,0 +1,111 @@
+<!--
+SPDX-License-Identifier: MPL-2.0
+Copyright (c) 2025 Nick Chiaravalle
+
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+If a copy of the MPL was not distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Site Template Picker</title>
+<style>
+  :root {
+    --bg: #0f172a;           /* deep slate */
+    --header-bg: #1e293b;    /* slightly lighter */
+    --btn-bg: #334155;
+    --btn-hover: #475569;
+    --btn-active: #6366f1;   /* accent */
+    --text: #e2e8f0;
+    --subtle: #94a3b8;
+  }
+
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  header {
+    background: var(--header-bg);
+    padding: .75rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,.3);
+  }
+
+  header h1 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0 .5rem 0 0;
+    color: var(--subtle);
+  }
+
+  button {
+    background: var(--btn-bg);
+    color: var(--text);
+    font-weight: 600;
+    border: none;
+    border-radius: .5rem;
+    padding: .4rem .9rem;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+  }
+  button:hover { background: var(--btn-hover); }
+  button:focus, button:active {
+    background: var(--btn-active);
+    color: #fff;
+    outline: none;
+  }
+
+  iframe {
+    flex: 1;
+    width: 100%;
+    border: none;
+    background: #fff;
+  }
+
+  @media (max-width: 600px) {
+    header { flex-direction: column; }
+    button { width: 100%; text-align: center; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Select a sample layout:</h1>
+    <button onclick="switchSample('classic-business/index.html')">Classic Business</button>
+    <button onclick="switchSample('corporate-landing-cl/index.html')">Corporate Landing</button>
+    <button onclick="switchSample('agency-starter-cl/index.html')">Agency Starter</button>
+    <button onclick="switchSample('consulting-pro/index.html')">Consulting Professional</button>
+    <button onclick="switchSample('portfolio-pro/index.html')">Professional Portfolio</button>
+    <button onclick="switchSample('company-profile-pro/index.html')">Company Profile</button>
+    <button onclick="switchSample('startup-launch-md/index.html')">Startup Launch</button>
+    <button onclick="switchSample('tech-saas-md/index.html')">Tech SaaS</button>
+    <button onclick="switchSample('creative-showcase-md/index.html')">Creative Showcase</button>
+    <button onclick="switchSample('minimal-portfolio/index.html')">Minimal Portfolio</button>
+    <button onclick="switchSample('simple-landing/index.html')">Simple Landing Page</button>
+    <button onclick="switchSample('plain-blog/index.html')">Plain Blog</button>
+    <button onclick="switchSample('geocities-revival/index.html')">Geocities Revival</button>
+    <button onclick="switchSample('corporate-xp/index.html')">Corporate 2000s</button>
+    <button onclick="switchSample('pixel-arcade/index.html')">Pixel Arcade</button>
+  </header>
+
+  <iframe id="preview" src="landing.html" title="Welcome!"></iframe>
+
+  <script>
+    function switchSample(path) {
+      document.getElementById('preview').src = path;
+    }
+  </script>
+</body>
+</html>
