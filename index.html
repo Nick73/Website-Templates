@@ -13,15 +13,14 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
 <title>Site Template Picker</title>
 <style>
   :root {
-    --bg: #0f172a;           /* deep slate */
-    --header-bg: #1e293b;    /* slightly lighter */
+    --bg: #0f172a;
+    --header-bg: #1e293b;
     --btn-bg: #334155;
     --btn-hover: #475569;
-    --btn-active: #6366f1;   /* accent */
+    --btn-active: #6366f1;
     --text: #e2e8f0;
     --subtle: #94a3b8;
   }
-
   body {
     margin: 0;
     font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
@@ -31,7 +30,6 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
     flex-direction: column;
     height: 100vh;
   }
-
   header {
     background: var(--header-bg);
     padding: .75rem 1rem;
@@ -42,14 +40,12 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
     justify-content: center;
     box-shadow: 0 2px 4px rgba(0,0,0,.3);
   }
-
   header h1 {
     font-size: 1rem;
     font-weight: 500;
     margin: 0 .5rem 0 0;
     color: var(--subtle);
   }
-
   button {
     background: var(--btn-bg);
     color: var(--text);
@@ -66,14 +62,12 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
     color: #fff;
     outline: none;
   }
-
   iframe {
     flex: 1;
     width: 100%;
     border: none;
     background: #fff;
   }
-
   @media (max-width: 600px) {
     header { flex-direction: column; }
     button { width: 100%; text-align: center; }
@@ -100,12 +94,48 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
     <button onclick="switchSample('pixel-arcade/index.html')">Pixel Arcade</button>
   </header>
 
-  <iframe id="preview" src="landing.html" title="Welcome!"></iframe>
+  <iframe id="preview" title="Welcome!"></iframe>
 
   <script>
-    function switchSample(path) {
-      document.getElementById('preview').src = path;
+    /**
+     * Determine the base URL for the repo so that:
+     * - On GitHub Pages project site, paths look like:
+     *   https://nick73.github.io/Website-Templates/<template>/index.html
+     * - Locally (file:// or http://localhost), paths look like:
+     *   <local path>/Website-Templates/<template>/index.html
+     */
+    function repoBase() {
+      const { origin, pathname, protocol } = window.location;
+
+      // Split path and find the "Website-Templates" directory in it.
+      // This works whether you're at /Website-Templates/ or nested like /Website-Templates/subdir/.
+      const parts = pathname.split('/').filter(Boolean);
+      const i = parts.indexOf('Website-Templates');
+
+      if (i !== -1) {
+        const uptoRepo = parts.slice(0, i + 1).join('/') + '/';
+        // file:// has empty origin; use protocol+host fallback
+        return origin ? `${origin}/${uptoRepo}` : `${protocol}//${uptoRepo}`;
+      }
+
+      // Fallback: assume current directory is the repo root
+      // (useful if you opened index.html from inside the repo root)
+      const base = document.baseURI || window.location.href;
+      return base.endsWith('/') ? base : base + '/';
     }
+
+    const BASE = repoBase();
+
+    function resolveTemplate(path) {
+      // Ensure we always resolve against the repo root
+      return new URL(path, BASE).href;
+    }
+
+    function switchSample(path) {
+      document.getElementById('preview').src = resolveTemplate(path);
+    }
+
+    document.getElementById('preview').src = resolveTemplate('landing.html');
   </script>
 </body>
 </html>
