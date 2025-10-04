@@ -47,7 +47,7 @@ index.html
 ## ⚡ How to Use
 
 1. **Browse the previews**  
-   Launch the repo on GitHub Pages or open `index.html` locally to see available templates.
+   Launch the repo on [GitHub Pages](https://nick73.github.io/Website-Templates/) or open `index.html` locally to see available templates.
 
 2. **Pick a starting point**  
    Copy one of the folders (e.g. `modern-landing`) into your own project.
