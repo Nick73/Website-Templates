@@ -275,6 +275,48 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
       <h1>QuickStart Web Templates</h1>
     </div>
     <span class="badge">MPL-2.0 • Plain HTML/CSS • Client-ready</span>
+    <a class="bmac-retro" href="https://buymeacoffee.com/chirv" target="_blank" rel="noopener">
+  <span class="dot" aria-hidden="true"></span>
+  Buy me a coffee
+</a>
+
+<style>
+  .bmac-retro{
+    --c1:#7dd3fc; --c2:#a78bfa;
+    display:inline-flex; align-items:center; gap:.55rem;
+    padding:.5rem .9rem;
+    color:#e2e8f0; text-decoration:none;
+    background:linear-gradient(180deg,#162241,#111a33);
+    border:1px solid #263453;
+    border-radius:0; /* square */
+    position:relative;
+    box-shadow:0 6px 18px rgba(0,0,0,.35);
+    font:700 13px/1 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  .bmac-retro::after{
+    /* faux pixel corners */
+    content:""; position:absolute; inset:0; pointer-events:none;
+    box-shadow:0 0 0 1px #2b3a5a;
+    mask:
+      linear-gradient(#000 0 0) subtract,
+      radial-gradient(10px,#000 98%,transparent) top left,
+      radial-gradient(10px,#000 98%,transparent) top right,
+      radial-gradient(10px,#000 98%,transparent) bottom left,
+      radial-gradient(10px,#000 98%,transparent) bottom right;
+    -webkit-mask:
+      linear-gradient(#000 0 0) subtract,
+      radial-gradient(10px,#000 98%,transparent) top left,
+      radial-gradient(10px,#000 98%,transparent) top right,
+      radial-gradient(10px,#000 98%,transparent) bottom left,
+      radial-gradient(10px,#000 98%,transparent) bottom right;
+  }
+  .bmac-retro:hover{ background:linear-gradient(180deg,#1b2b56,#121d3b); }
+  .bmac-retro .dot{
+    width:12px; height:12px; border-radius:3px;
+    background: conic-gradient(from 180deg,var(--c1),var(--c2),var(--c1));
+    box-shadow:0 0 10px rgba(125,211,252,.6);
+  }
+</style>
   </div>
 </header>
 

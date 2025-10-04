@@ -1,18 +1,21 @@
 # QuickStart Web Templates
+
 *A collection of simple, adaptable starter templates for building websites from scratch.*
 
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](LICENSE)
-
----
+----------------------------------------------------------------------------------------------
 
 ## 🚀 About
+
 This repository contains a growing set of **HTML/CSS website starters** — minimal, clean, and ready for rapid prototyping or client work. Each template is built with plain HTML/CSS (no frameworks or build steps required) so you can quickly modify and deploy.
 
 These templates are ideal for:
+
 - Freelancers who want to present **multiple design options** to clients.
 - Beginners who want to study and adapt real layouts.
 - Developers who need a fast starting point for static sites.
 - Works great with my [Website Tester](https://github.com/Nick73/website-tester)
+
 ---
 
 ## 📂 Structure
@@ -46,16 +49,13 @@ index.html
 
 ## ⚡ How to Use
 
-1. **Browse the previews**  
+1. **Browse the previews**
    Launch the repo on [GitHub Pages](https://nick73.github.io/Website-Templates/) or open `index.html` locally to see available templates.
-
-2. **Pick a starting point**  
+2. **Pick a starting point**
    Copy one of the folders (e.g. `modern-landing`) into your own project.
-
-3. **Customize**  
+3. **Customize**
    Edit the HTML, CSS, images, and text as needed. Each template is cleanly commented to make customization easy.
-
-4. **Deploy**  
+4. **Deploy**
    Push to your hosting service of choice (GitHub Pages, Netlify, Vercel, etc.).
 
 ---
@@ -69,21 +69,18 @@ index.html
 
 ## 🧾 License
 
-This project is licensed under the [Mozilla Public License 2.0](LICENSE).  
-- ✅ Free to use, modify, and even include in proprietary projects.  
+This project is licensed under the [Mozilla Public License 2.0](LICENSE).
+
+- ✅ Free to use, modify, and even include in proprietary projects.
 - ⚠️ If you change any of the files in this repo and redistribute them, you **must publish those changes under MPL 2.0 and keep the original attribution**.
 
 Please leave the author credit in HTML comments or documentation when possible — it helps others find and contribute.
 
 ---
 
-## 💡 Contributing
-
-Pull requests for new template styles, improvements, or bug fixes are welcome!  
-Check out [CONTRIBUTING.md](CONTRIBUTING.md) (if present) or open an issue with suggestions.
-
----
-
 ### ✨ Credits
-Created & maintained by [Your Name](https://github.com/yourusername).  
+
+Created & maintained by [Nick Chiaravalle](https://github.com/Nick73).
 If you use these templates, a star ⭐ on the repo is appreciated!
+
+[!["Buy Me A Coffee"](https://cdn.buymeacoffee.com/buttons/default-orange.png)](https://www.buymeacoffee.com/chirv)
