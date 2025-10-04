@@ -579,7 +579,7 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
             <a class="btn" href="pixel-arcade/" target="_blank" rel="noopener">Open Folder</a>
           </div>
         </div>
-      </div>
+      </div>pixel-arcade
 
     </div>
 
@@ -635,6 +635,25 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
 </footer>
 
 <script>
+  // --- Compute repo base so links work on GitHub Pages and locally ---
+  function repoBase() {
+    const { origin, pathname, protocol } = window.location;
+    const parts = pathname.split('/').filter(Boolean);
+    const repoIdx = parts.indexOf('Website-Templates');
+
+    if (repoIdx !== -1) {
+      const uptoRepo = parts.slice(0, repoIdx + 1).join('/') + '/';
+      // origin is empty on file:// — fall back to protocol
+      return origin ? `${origin}/${uptoRepo}` : `${protocol}//${uptoRepo}`;
+    }
+    // Fallback: current directory
+    const base = document.baseURI || window.location.href;
+    return base.endsWith('/') ? base : base + '/';
+  }
+
+  const BASE = repoBase();
+  const resolveFromRepo = (path) => new URL(path, BASE).href;
+
   // --- Filtering & search ---
   const chips = document.querySelectorAll('.chip');
   const catalog = document.getElementById('catalog');
@@ -644,7 +663,6 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
   function applyFilters(){
     const active = document.querySelector('.chip.active')?.dataset.filter || 'all';
     const q = (search.value || '').trim().toLowerCase();
-
     cards.forEach(card => {
       const cat = card.dataset.cat;
       const name = (card.dataset.name || '').toLowerCase();
@@ -654,7 +672,6 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
       card.style.display = (matchCat && matchSearch) ? '' : 'none';
     });
   }
-
   chips.forEach(c => c.addEventListener('click', () => {
     chips.forEach(x => x.classList.remove('active'));
     c.classList.add('active');
@@ -662,17 +679,17 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
   }));
   search.addEventListener('input', applyFilters);
 
-  // --- Preview wiring ---
+  // --- Preview wiring (now repo-root safe) ---
   const iframe = document.getElementById('preview');
   const label = document.getElementById('previewLabel');
   const quickSelect = document.getElementById('quickSelect');
   const openNew = document.getElementById('openNew');
 
   function setPreview(path, name){
-    iframe.src = path;
+    const url = resolveFromRepo(path);
+    iframe.src = url;
     label.innerHTML = `Preview: <strong>${name || path}</strong>`;
     quickSelect.value = path;
-    // Scroll preview into view on small screens
     document.getElementById('previewBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
@@ -688,19 +705,21 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
   // Quick select dropdown
   quickSelect.addEventListener('change', e => {
     const path = e.target.value;
-    const name = [...document.querySelectorAll('.card')].find(c =>
-      c.querySelector(`[data-path="${path}"]`))?.dataset.name || path;
+    const card = [...document.querySelectorAll('.card')].find(c =>
+      c.querySelector(`[data-path="${path}"]`));
+    const name = card?.dataset.name || path;
     setPreview(path, name);
   });
 
   // Open current in new tab
   openNew.addEventListener('click', () => {
-    const url = iframe.getAttribute('src') || '';
-    if (url) window.open(url, '_blank', 'noopener');
+    const currentPath = quickSelect.value || 'corporate-xp/index.html';
+    window.open(resolveFromRepo(currentPath), '_blank', 'noopener');
   });
 
-  // Initial filter pass
+  // Initial state
   applyFilters();
+  setPreview('corporate-xp/index.html', 'Corporate 2000s');
 </script>
 </body>
 </html>
