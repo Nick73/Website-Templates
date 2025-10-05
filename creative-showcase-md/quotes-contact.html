@@ -1,0 +1,117 @@
+<!--
+SPDX-License-Identifier: MPL-2.0
+Copyright (c) 2025 Nick Chiaravalle
+
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+If a copy of the MPL was not distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+<title>HandymanCo • Quotes & Contact</title>
+<meta name="description" content="Request a quote or contact HandymanCo. Mobile-friendly forms and business details." />
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0f1a34" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<link rel="icon" href="img/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css" />
+
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="wrap bar">
+      <a class="brand" href="index.html" aria-label="Home">
+        <img class="brand-mark" src="img/mark.svg" alt="" width="28" height="28" aria-hidden="true">
+        <span class="brand-name">Handyman<span class="accent">Co</span></span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav" id="navToggle">
+        <span class="bars" aria-hidden="true"></span>
+        <span class="nav-label">Menu</span>
+      </button>
+      <nav id="nav" class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="showcase.html">Showcase</a>
+        <a href="quotes-contact.html" aria-current="page">Quotes & Contact</a>
+        <a class="btn small ghost" href="login.html">Client Login</a>
+        <a class="btn small" href="#quote">Get a Quote</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section id="quote" class="section">
+      <div class="wrap">
+        <header class="section-head">
+          <h1>Request a quote</h1>
+          <p>We’ll reply within one business day.</p>
+        </header>
+        <form class="form" onsubmit="event.preventDefault(); this.reset(); alert('Thanks! We will be in touch.');">
+          <div class="row">
+            <label>Full name<input required autocomplete="name"></label>
+            <label>Email<input type="email" required autocomplete="email"></label>
+          </div>
+          <label>Phone<input type="tel" inputmode="tel" autocomplete="tel"></label>
+          <label>Service needed
+            <select required>
+              <option value="">Select…</option>
+              <option>Repairs</option>
+              <option>Installations</option>
+              <option>Small Remodel</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label>Project details<textarea rows="5" placeholder="Timeline, materials, budget, photos link…"></textarea></label>
+          <button class="btn" type="submit">Submit request</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>Contact</h2>
+          <p>Prefer a call or text? We’re prompt.</p>
+        </header>
+        <div class="cards-3">
+          <article class="card"><h3>Phone</h3><p><a href="tel:+15551234567">+1 (555) 123-4567</a></p></article>
+          <article class="card"><h3>Email</h3><p><a href="mailto:hello@handymanco.example">hello@handymanco.example</a></p></article>
+          <article class="card"><h3>Hours</h3><p>Mon–Fri: 9–6 • Sat: 10–2</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>Service area</h2>
+          <p>Based in Your Town, serving nearby neighborhoods.</p>
+        </header>
+        <div class="card">
+          <img src="img/map.svg" alt="Service area map placeholder" width="1200" height="600" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap foot">
+      <div>© 2025 HandymanCo • Quotes & Contact</div>
+      <nav aria-label="Footer">
+        <a href="index.html">Home</a> · <a href="../..//LICENSE">MPL-2.0</a>
+      </nav>
+    </div>
+  </footer>
+
+  <div class="sticky-actions">
+    <a class="fab" href="tel:+15551234567">📞 Call</a>
+    <a class="fab" href="#quote">🧾 Quote</a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

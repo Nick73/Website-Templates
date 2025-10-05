@@ -1,0 +1,113 @@
+<!--
+SPDX-License-Identifier: MPL-2.0
+Copyright (c) 2025 Nick Chiaravalle
+
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+If a copy of the MPL was not distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+<title>HandymanCo • Showcase</title>
+<meta name="description" content="Organized showcase of HandymanCo projects with categories and filters." />
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0f1a34" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<link rel="icon" href="img/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css" />
+
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="wrap bar">
+      <a class="brand" href="index.html" aria-label="Home">
+        <img class="brand-mark" src="img/mark.svg" alt="" width="28" height="28" aria-hidden="true">
+        <span class="brand-name">Handyman<span class="accent">Co</span></span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav" id="navToggle">
+        <span class="bars" aria-hidden="true"></span>
+        <span class="nav-label">Menu</span>
+      </button>
+      <nav id="nav" class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="showcase.html" aria-current="page">Showcase</a>
+        <a href="quotes-contact.html">Quotes & Contact</a>
+        <a class="btn small ghost" href="login.html">Client Login</a>
+        <a class="btn small" href="quotes-contact.html#quote">Get a Quote</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="section">
+    <div class="wrap">
+      <header class="section-head">
+        <h1>Showcase</h1>
+        <p>Browse projects by category. Tap an image for a closer look.</p>
+      </header>
+
+      <div class="filters">
+        <input id="search" class="input" type="search" placeholder="Search (e.g., shelves, tile, vanity)…" aria-label="Search projects">
+        <div class="chiprow" role="listbox" aria-label="Filter by category">
+          <button class="chip active" data-filter="all" aria-selected="true">All</button>
+          <button class="chip" data-filter="repairs">Repairs</button>
+          <button class="chip" data-filter="installations">Installations</button>
+          <button class="chip" data-filter="remodels">Small Remodels</button>
+        </div>
+      </div>
+
+      <section class="gallery" id="gallery" aria-live="polite">
+        <!-- items injected by script -->
+      </section>
+    </div>
+  </main>
+
+  <div class="modal" id="modal" aria-hidden="true" aria-label="Image viewer">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <div class="modal-body">
+      <img id="modalImg" alt="Selected project" />
+      <div class="modal-meta">
+        <h3 id="modalTitle"></h3>
+        <p id="modalCat" class="ink-dim"></p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="wrap foot">
+      <div>© 2025 HandymanCo • Showcase</div>
+      <nav aria-label="Footer">
+        <a href="quotes-contact.html">Contact</a> · <a href="../..//LICENSE">MPL-2.0</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const items = [
+      {t:"Floating shelves", c:"installations"}, {t:"Backsplash tile", c:"remodels"},
+      {t:"Vanity install", c:"installations"}, {t:"Door repair", c:"repairs"},
+      {t:"Deck step fix", c:"repairs"}, {t:"Closet system", c:"installations"},
+      {t:"Shiplap wall", c:"remodels"}, {t:"Faucet replace", c:"repairs"},
+      {t:"Cabinet handles", c:"installations"}, {t:"Drywall patch", c:"repairs"},
+      {t:"Light fixture", c:"installations"}, {t:"Entry refresh", c:"remodels"}
+    ];
+    const g = document.getElementById('gallery');
+    items.forEach((it, i) => {
+      const card = document.createElement('article');
+      card.className = 'shot card';
+      card.dataset.cat = it.c;
+      card.innerHTML = `
+        <figure class="shot-fig">
+          <img src="img/shot${(i%6)+1}.svg" alt="${it.t}">
+          <figcaption>${it.t}</figcaption>
+        </figure>`;
+      g.appendChild(card);
+    });
+  </script>
+</body>
+</html>

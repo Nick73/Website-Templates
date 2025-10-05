@@ -5,3 +5,124 @@ Copyright (c) 2025 Nick Chiaravalle
 This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
 If a copy of the MPL was not distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/.
 -->
+
+<!doctype html>
+<html lang="en">
+<head>
+<title>HandymanCo • Home</title>
+<meta name="description" content="HandymanCo — reliable local contractor for repairs, installations, and small remodels. Licensed & insured." />
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0f1a34" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<link rel="icon" href="img/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css" />
+
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="wrap bar">
+      <a class="brand" href="index.html" aria-label="Home">
+        <img class="brand-mark" src="img/mark.svg" alt="" width="28" height="28" aria-hidden="true">
+        <span class="brand-name">Handyman<span class="accent">Co</span></span>
+      </a>
+
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav" id="navToggle">
+        <span class="bars" aria-hidden="true"></span>
+        <span class="nav-label">Menu</span>
+      </button>
+
+      <nav id="nav" class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="showcase.html">Showcase</a>
+        <a href="quotes-contact.html">Quotes & Contact</a>
+        <a class="btn small ghost" href="login.html">Client Login</a>
+        <a class="btn small" href="quotes-contact.html#quote">Get a Quote</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1>Reliable handyman services, done right the first time.</h1>
+        <p class="lede">Repairs, installations, and small remodels for homes and small businesses. Licensed, insured, and local.</p>
+        <div class="actions">
+          <a href="quotes-contact.html#quote" class="btn">Request a quote</a>
+          <a href="showcase.html" class="btn ghost">See our work</a>
+        </div>
+        <ul class="points" role="list">
+          <li>Licensed & insured</li>
+          <li>On-time & tidy</li>
+          <li>Transparent pricing</li>
+        </ul>
+      </div>
+      <div class="hero-art">
+        <img src="img/hero-tools.svg" alt="" width="880" height="560" loading="eager" decoding="async">
+      </div>
+    </div>
+  </section>
+
+  <main id="main">
+    <section class="section alt">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>Services</h2>
+          <p>From quick fixes to room refreshes.</p>
+        </header>
+        <div class="cards-3">
+          <article class="card"><h3>Repairs</h3><p>Drywall patches, door fixes, leaky faucets, outlets.</p></article>
+          <article class="card"><h3>Installations</h3><p>Fixtures, shelving, vanities, appliances, trim.</p></article>
+          <article class="card"><h3>Small Remodels</h3><p>Bespoke updates for kitchens, baths, and entryways.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>Why choose us</h2>
+          <p>We keep things simple, on-time, and on-budget.</p>
+        </header>
+        <div class="facts-grid">
+          <article class="fact card"><div class="kpi">98%</div><p>On-time</p></article>
+          <article class="fact card"><div class="kpi">4.9★</div><p>Avg rating</p></article>
+          <article class="fact card"><div class="kpi">24h</div><p>Quote turnaround</p></article>
+          <article class="fact card"><div class="kpi">Insured</div><p>Peace of mind</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>Happy customers</h2>
+        </header>
+        <div class="testi">
+          <blockquote class="quote card">“Showed up on time, worked clean, and the shelves look perfect.”<cite>— Dana K.</cite></blockquote>
+          <blockquote class="quote card">“Quick fix on a leaky sink. Transparent price and friendly.”<cite>— Malik P.</cite></blockquote>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap foot">
+      <div>© 2025 HandymanCo • Licensed & Insured</div>
+      <nav aria-label="Footer">
+        <a href="quotes-contact.html">Contact</a> · <a href="showcase.html">Showcase</a> · <a href="../..//LICENSE">MPL-2.0</a>
+      </nav>
+    </div>
+  </footer>
+
+  <div class="sticky-actions" role="navigation" aria-label="Quick actions">
+    <a class="fab" href="tel:+15551234567" aria-label="Call">📞 Call</a>
+    <a class="fab" href="quotes-contact.html#quote" aria-label="Get a Quote">🧾 Quote</a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

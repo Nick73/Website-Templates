@@ -1,0 +1,77 @@
+<!--
+SPDX-License-Identifier: MPL-2.0
+Copyright (c) 2025 Nick Chiaravalle
+
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+If a copy of the MPL was not distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+<title>HandymanCo • Client Login</title>
+<meta name="description" content="Client login placeholder — wire to your backend or storage of choice." />
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0f1a34" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<link rel="icon" href="img/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css" />
+
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="wrap bar">
+      <a class="brand" href="index.html" aria-label="Home">
+        <img class="brand-mark" src="img/mark.svg" alt="" width="28" height="28" aria-hidden="true">
+        <span class="brand-name">Handyman<span class="accent">Co</span></span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav" id="navToggle">
+        <span class="bars" aria-hidden="true"></span>
+        <span class="nav-label">Menu</span>
+      </button>
+      <nav id="nav" class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="showcase.html">Showcase</a>
+        <a href="quotes-contact.html">Quotes & Contact</a>
+        <a class="btn small" href="login.html" aria-current="page">Client Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="section">
+    <div class="wrap auth">
+      <header class="section-head">
+        <h1>Client Login</h1>
+        <p>Connect this page to your auth system (e.g., Firebase Auth, Supabase, or your backend). The UI below is ready to wire up.</p>
+      </header>
+
+      <form class="form card auth-form" onsubmit="event.preventDefault(); alert('This is a template. Wire it to your auth backend.');">
+        <label>Email<input type="email" required autocomplete="email"></label>
+        <label>Password<input type="password" required autocomplete="current-password"></label>
+        <button class="btn" type="submit">Sign in</button>
+        <button class="btn ghost" type="button" onclick="alert('Implement OAuth flow')">Continue with Google</button>
+        <p class="ink-dim" style="margin: .3rem 0 0;">No account? <a href="#" onclick="alert('Implement sign-up flow')">Create one</a></p>
+      </form>
+
+      <div class="card note">
+        <h3>After login</h3>
+        <p>Send clients to a simple “Upload” page or give them access to the <a href="showcase.html">Showcase</a> admin tools to add images and captions.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap foot">
+      <div>© 2025 HandymanCo • Client Portal</div>
+      <nav aria-label="Footer">
+        <a href="index.html">Home</a> · <a href="../..//LICENSE">MPL-2.0</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
