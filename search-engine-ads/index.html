@@ -1,0 +1,180 @@
+<!--
+SPDX-License-Identifier: MPL-2.0
+Copyright (c) 2025 Nick Chiaravalle
+
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+If a copy of the MPL was not distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Portal Classic • Early-2000s Search</title>
+<meta name="description" content="A classic early-2000s portal search page with side ads, weather, local news, and world news." />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ======= TOP BAR ======= -->
+  <header class="topbar" role="banner">
+    <div class="wrap">
+      <a class="brand" href="." aria-label="Portal Classic Home">
+        <span class="brand-big">Portal</span><span class="brand-accent">Classic</span>
+      </a>
+      <nav class="utility" aria-label="Utility">
+        <a href="#" tabindex="0">Mail</a>
+        <a href="#" tabindex="0">Groups</a>
+        <a href="#" tabindex="0">Shopping</a>
+        <a href="#" tabindex="0">Finance</a>
+        <a href="#" tabindex="0">Sports</a>
+        <a href="#" tabindex="0">More ▾</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ======= SEARCH STRIP ======= -->
+  <section class="search-strip" role="search" aria-label="Site search">
+    <div class="wrap search-row">
+      <form id="searchForm" class="search-box">
+        <label class="sr-only" for="q">Search query</label>
+        <input id="q" name="q" type="search" placeholder="Search the web" autocomplete="off" />
+        <select id="engine" aria-label="Search provider">
+          <option value="ddg">Web</option>
+          <option value="images">Images</option>
+          <option value="news">News</option>
+          <option value="wiki">Wikipedia</option>
+          <option value="maps">Maps</option>
+        </select>
+        <button type="submit" class="btn">Search</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ======= LAYOUT: LEFT AD • MAIN • RIGHT AD ======= -->
+  <div class="wrap layout">
+    <!-- Left Skyscraper Ad -->
+    <aside class="rail left-rail" aria-label="Advertisement">
+      <div class="ad skyscraper">
+        <div class="ad-label">ADVERTISEMENT</div>
+        <div class="ad-media">
+          160×600<br/>Skyscraper
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main column -->
+    <main id="main" class="main" role="main">
+      <!-- WEATHER -->
+      <section class="module weather" aria-labelledby="weather-title">
+        <div class="module-head">
+          <h2 id="weather-title">Local Weather</h2>
+          <form id="locForm" class="inline-form" title="Set your city">
+            <label for="loc" class="sr-only">City or ZIP</label>
+            <input id="loc" name="loc" type="text" placeholder="Enter city or ZIP…" />
+            <button class="btn small" type="submit">Update</button>
+          </form>
+        </div>
+        <div class="weather-body" id="weatherBody" data-city="Your Town">
+          <div class="w-current">
+            <div class="w-temp" id="wTemp">72°</div>
+            <div class="w-meta">
+              <div class="w-city" id="wCity">Your Town</div>
+              <div class="w-cond" id="wCond">Partly Cloudy</div>
+              <div class="w-extra" id="wExtra">H:78° L:61° • NW 6 mph</div>
+            </div>
+          </div>
+          <ul class="w-hrs" id="wHours" aria-label="Next hours">
+            <li><span>Now</span><b>72°</b></li>
+            <li><span>+3h</span><b>73°</b></li>
+            <li><span>+6h</span><b>71°</b></li>
+            <li><span>+9h</span><b>67°</b></li>
+            <li><span>+12h</span><b>64°</b></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- LOCAL NEWS -->
+      <section class="module news" aria-labelledby="local-title">
+        <div class="module-head">
+          <h2 id="local-title">Local News</h2>
+          <a class="more" href="#" aria-label="More local news">More »</a>
+        </div>
+        <div class="news-grid" id="localNews">
+          <article class="story lead">
+            <a href="#"><h3>City Council Approves Riverside Park Renovation</h3></a>
+            <p>Phase one will add lighting, bike lanes, and a new pedestrian bridge across 3rd Ave.</p>
+          </article>
+          <article class="story">
+            <a href="#"><h4>Transit Fares Frozen Through Winter</h4></a>
+            <p>Subsidy extension keeps fares at current levels while ridership rebounds.</p>
+          </article>
+          <article class="story">
+            <a href="#"><h4>High School Robotics Team Wins Regional</h4></a>
+            <p>Team 73 heads to nationals after a dramatic finals sweep.</p>
+          </article>
+          <article class="story">
+            <a href="#"><h4>Weekend Street Fair: Road Closures Announced</h4></a>
+            <p>Main St. between 4th and 10th closes Sat 6am–10pm.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- WORLD NEWS -->
+      <section class="module news" aria-labelledby="world-title">
+        <div class="module-head">
+          <h2 id="world-title">World News</h2>
+          <a class="more" href="#" aria-label="More world news">More »</a>
+        </div>
+        <div class="news-list" id="worldNews">
+          <article class="story row">
+            <a href="#"><h4>Summit Leaders Outline New Climate Framework</h4></a>
+            <p>Draft agreement targets grid modernization and cross-border storage.</p>
+          </article>
+          <article class="story row">
+            <a href="#"><h4>Breakthrough in Battery Recycling Announced</h4></a>
+            <p>New process recovers 95% of critical materials with lower emissions.</p>
+          </article>
+          <article class="story row">
+            <a href="#"><h4>Markets Mixed After Central Bank Signals</h4></a>
+            <p>Equities steady while bond yields ease on updated guidance.</p>
+          </article>
+          <article class="story row">
+            <a href="#"><h4>Global Cybersecurity Exercise Wraps Up</h4></a>
+            <p>Forty nations simulate supply-chain attacks and share incident playbooks.</p>
+          </article>
+          <article class="story row">
+            <a href="#"><h4>Archaeologists Map Lost Port Using Drones</h4></a>
+            <p>High-res scans reveal grid of streets beneath coastal sands.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- Right Skyscraper Ad -->
+    <aside class="rail right-rail" aria-label="Advertisement">
+      <div class="ad skyscraper">
+        <div class="ad-label">ADVERTISEMENT</div>
+        <div class="ad-media">
+          160×600<br/>Skyscraper
+        </div>
+      </div>
+      <div class="ad mpu">
+        <div class="ad-label">ADVERTISEMENT</div>
+        <div class="ad-media">300×250</div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ======= FOOTER ======= -->
+  <footer class="footer" role="contentinfo">
+    <div class="wrap">
+      <nav class="foot-links" aria-label="Footer">
+        <a href="#">Help</a> • <a href="#">Feedback</a> • <a href="../..//LICENSE">MPL-2.0</a>
+      </nav>
+      <div class="copy">© 2025 Portal Classic</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
