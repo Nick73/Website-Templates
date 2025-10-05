@@ -5,3 +5,70 @@ Copyright (c) 2025 Nick Chiaravalle
 This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
 If a copy of the MPL was not distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/.
 -->
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Minimal Landing</title>
+<meta name="description" content="A simple, single-column landing page that loads fast and stays focused." />
+<meta property="og:title" content="Minimal Landing" />
+<meta property="og:description" content="Simple, single-column landing page." />
+<link rel="icon" href="img/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site">
+    <div class="wrap nav">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="img/logo.svg" alt="" aria-hidden="true">
+        Minimal<span style="color:var(--accent)">One</span>
+      </a>
+      <nav>
+        <a href="about.html">About</a>
+        <a href="contact.html" class="cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="card">
+          <span class="badge">FAST • FOCUSED • MOBILE-FIRST</span>
+          <h1>Say one thing clearly.</h1>
+          <p class="lede">A lightweight landing page that turns attention into action. No clutter, no heavy scripts — just your value proposition and a clear path forward.</p>
+          <div class="cta-row">
+            <a class="button primary" href="contact.html">Get Started</a>
+            <a class="button secondary" href="about.html">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="head">
+          <h2>Benefits</h2>
+          <p class="note">Built with accessibility, performance, and simplicity in mind.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card"><h3>Ultra fast</h3><p>No frameworks, minimal CSS, and zero layout shifts.</p></article>
+          <article class="card"><h3>Mobile-first</h3><p>Comfortable reading sizes, big tap targets, single column.</p></article>
+          <article class="card"><h3>Flexible</h3><p>Use it as-is, or extend with sections and pages.</p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap foot">
+      <div>© 2025 MinimalOne</div>
+      <div><a href="../..//LICENSE">MPL-2.0</a></div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

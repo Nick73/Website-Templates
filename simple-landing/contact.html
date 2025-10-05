@@ -1,0 +1,59 @@
+<!--
+SPDX-License-Identifier: MPL-2.0
+Copyright (c) 2025 Nick Chiaravalle
+
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+If a copy of the MPL was not distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Contact • MinimalOne</title>
+<meta name="description" content="Get in touch. Quick contact form with mobile-first design." />
+<link rel="icon" href="img/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site">
+    <div class="wrap nav">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="img/logo.svg" alt="" aria-hidden="true">
+        Minimal<span style="color:var(--accent)">One</span>
+      </a>
+      <nav>
+        <a href="about.html">About</a>
+        <a href="contact.html" class="cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="wrap">
+      <div class="head">
+        <h1>Contact</h1>
+        <p class="note">We usually respond within one business day.</p>
+      </div>
+      <form class="form card" onsubmit="event.preventDefault(); this.reset(); alert('Thanks! We will be in touch.');">
+        <div class="row">
+          <label>Full name<input required autocomplete="name"></label>
+          <label>Email<input type="email" required autocomplete="email"></label>
+        </div>
+        <label>Message<textarea rows="5" placeholder="How can we help?"></textarea></label>
+        <button class="button primary" type="submit">Send</button>
+      </form>
+      <p class="note">Prefer email? <a href="mailto:hello@example.com">hello@example.com</a></p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap foot">
+      <div>© 2025 MinimalOne</div>
+      <div><a href="../..//LICENSE">MPL-2.0</a></div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
