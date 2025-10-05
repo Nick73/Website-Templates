@@ -163,15 +163,38 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
   @media (max-width: 640px){
     .card { grid-template-columns: 1fr; }
   }
+
+  /* ====== Mini live preview thumbs ====== */
   .thumb {
-    height: 120px; border-radius: .6rem; border: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+    height: 120px;                 /* fixed thumbnail height */
+    border-radius: .6rem;
+    border: 1px solid var(--line);
     background:
       linear-gradient(135deg, rgba(167,139,250,.2), rgba(125,211,252,.15)),
-      repeating-linear-gradient( 45deg, rgba(255,255,255,.04) 0 2px, transparent 2px 6px),
+      repeating-linear-gradient(45deg, rgba(255,255,255,.04) 0 2px, transparent 2px 6px),
       linear-gradient(180deg, #172243, #0f1a34);
-    display: grid; place-items: center; color: var(--ink-dim); font-size: .85rem;
   }
-  .thumb small { opacity: .8; }
+  .thumb .mini-wrap{
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  .thumb iframe.mini-frame{
+    /* Virtual desktop size for preview (fits most templates) */
+    width: 1050px;
+    height: 700px;
+
+    /* Scale to fit 120px height: 700 * 0.16 = 112px */
+    transform-origin: top left;
+    transform: scale(0.172);
+
+    border: 0;
+    pointer-events: none;          /* non-interactive in thumb */
+    background: #fff;
+  }
+
   .card h3 { margin: 0; font-size: 1.05rem; }
   .meta { color: var(--ink-dim); font-size: .9rem; margin: .15rem 0 .5rem; }
   .tags { display: flex; flex-wrap: wrap; gap: .35rem; margin: .4rem 0 .6rem; }
@@ -238,7 +261,6 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
 
   /* ====== Retro pixel-corner accent ====== */
   .pixel-corners {
-    /* simple faux pixel corner using box-shadow layers */
     position: relative;
     border-radius: 0;
   }
@@ -276,9 +298,9 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
     </div>
     <span class="badge">MPL-2.0 • Plain HTML/CSS • Client-ready</span>
     <a class="bmac-retro" href="https://buymeacoffee.com/chirv" target="_blank" rel="noopener">
-  <span class="dot" aria-hidden="true"></span>
-  Buy me a coffee
-</a>
+      <span class="dot" aria-hidden="true"></span>
+      Buy me a coffee
+    </a>
 
 <style>
   .bmac-retro{
@@ -294,7 +316,6 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
     font:700 13px/1 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
   }
   .bmac-retro::after{
-    /* faux pixel corners */
     content:""; position:absolute; inset:0; pointer-events:none;
     box-shadow:0 0 0 1px #2b3a5a;
     mask:
@@ -353,7 +374,11 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
 
       <!-- CLASSIC -->
       <div class="card pixel-corners" data-name="Classic Business" data-cat="Classic">
-        <div class="thumb"><small>classic-business/</small></div>
+        <div class="thumb" data-path="classic-business/index.html">
+          <div class="mini-wrap">
+            <iframe class="mini-frame" title="Classic Business (thumb)" loading="lazy" sandbox="allow-same-origin"></iframe>
+          </div>
+        </div>
         <div>
           <h3>Classic Business</h3>
           <div class="meta">Simple header, hero, services, and contact — ideal for small local businesses.</div>
@@ -368,7 +393,11 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
       </div>
 
       <div class="card pixel-corners" data-name="Corporate Landing" data-cat="Classic">
-        <div class="thumb"><small>corporate-landing-cl/</small></div>
+        <div class="thumb" data-path="corporate-landing-cl/index.html">
+          <div class="mini-wrap">
+            <iframe class="mini-frame" title="Corporate Landing (thumb)" loading="lazy" sandbox="allow-same-origin"></iframe>
+          </div>
+        </div>
         <div>
           <h3>Corporate Landing</h3>
           <div class="meta">Clean hero, trust badges, and a primary CTA. Great for single-page intros.</div>
@@ -383,7 +412,11 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
       </div>
 
       <div class="card pixel-corners" data-name="Agency Starter" data-cat="Classic">
-        <div class="thumb"><small>agency-starter-cl/</small></div>
+        <div class="thumb" data-path="agency-starter-cl/index.html">
+          <div class="mini-wrap">
+            <iframe class="mini-frame" title="Agency Starter (thumb)" loading="lazy" sandbox="allow-same-origin"></iframe>
+          </div>
+        </div>
         <div>
           <h3>Agency Starter</h3>
           <div class="meta">Hero + about + services + contact — the dependable starter for client agencies.</div>
@@ -399,7 +432,11 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
 
       <!-- PROFESSIONAL -->
       <div class="card pixel-corners" data-name="Consulting Professional" data-cat="Professional">
-        <div class="thumb"><small>consulting-pro/</small></div>
+        <div class="thumb" data-path="consulting-pro/index.html">
+          <div class="mini-wrap">
+            <iframe class="mini-frame" title="Consulting Professional (thumb)" loading="lazy" sandbox="allow-same-origin"></iframe>
+          </div>
+        </div>
         <div>
           <h3>Consulting Professional</h3>
           <div class="meta">Trust-first layout with clear value props, case studies, and contact.</div>
@@ -414,7 +451,11 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
       </div>
 
       <div class="card pixel-corners" data-name="Professional Portfolio" data-cat="Professional">
-        <div class="thumb"><small>portfolio-pro/</small></div>
+        <div class="thumb" data-path="portfolio-pro/index.html">
+          <div class="mini-wrap">
+            <iframe class="mini-frame" title="Professional Portfolio (thumb)" loading="lazy" sandbox="allow-same-origin"></iframe>
+          </div>
+        </div>
         <div>
           <h3>Professional Portfolio</h3>
           <div class="meta">Project grid, highlights, and contact for showcasing client work.</div>
@@ -429,7 +470,11 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
       </div>
 
       <div class="card pixel-corners" data-name="Company Profile" data-cat="Professional">
-        <div class="thumb"><small>company-profile-pro/</small></div>
+        <div class="thumb" data-path="company-profile-pro/index.html">
+          <div class="mini-wrap">
+            <iframe class="mini-frame" title="Company Profile (thumb)" loading="lazy" sandbox="allow-same-origin"></iframe>
+          </div>
+        </div>
         <div>
           <h3>Company Profile</h3>
           <div class="meta">About, team bios, social proof, and contact for established businesses.</div>
@@ -445,7 +490,11 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
 
       <!-- MODERN -->
       <div class="card pixel-corners" data-name="Startup Launch" data-cat="Modern">
-        <div class="thumb"><small>startup-launch-md/</small></div>
+        <div class="thumb" data-path="startup-launch-md/index.html">
+          <div class="mini-wrap">
+            <iframe class="mini-frame" title="Startup Launch (thumb)" loading="lazy" sandbox="allow-same-origin"></iframe>
+          </div>
+        </div>
         <div>
           <h3>Startup Launch</h3>
           <div class="meta">Bold hero, gradient blocks, and sharp CTA for product launches.</div>
@@ -460,7 +509,11 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
       </div>
 
       <div class="card pixel-corners" data-name="Tech SaaS" data-cat="Modern">
-        <div class="thumb"><small>tech-saas-md/</small></div>
+        <div class="thumb" data-path="tech-saas-md/index.html">
+          <div class="mini-wrap">
+            <iframe class="mini-frame" title="Tech SaaS (thumb)" loading="lazy" sandbox="allow-same-origin"></iframe>
+          </div>
+        </div>
         <div>
           <h3>Tech SaaS</h3>
           <div class="meta">Cards, subtle motion, and pricing tables — a crisp product site.</div>
@@ -475,7 +528,11 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
       </div>
 
       <div class="card pixel-corners" data-name="Creative Showcase" data-cat="Modern">
-        <div class="thumb"><small>creative-showcase-md/</small></div>
+        <div class="thumb" data-path="creative-showcase-md/index.html">
+          <div class="mini-wrap">
+            <iframe class="mini-frame" title="Creative Showcase (thumb)" loading="lazy" sandbox="allow-same-origin"></iframe>
+          </div>
+        </div>
         <div>
           <h3>Creative Showcase</h3>
           <div class="meta">Bold color blocking, overlapping imagery, and portfolio features.</div>
@@ -491,7 +548,11 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
 
       <!-- MINIMAL -->
       <div class="card pixel-corners" data-name="Minimal Portfolio" data-cat="Minimal">
-        <div class="thumb"><small>minimal-portfolio/</small></div>
+        <div class="thumb" data-path="minimal-portfolio/index.html">
+          <div class="mini-wrap">
+            <iframe class="mini-frame" title="Minimal Portfolio (thumb)" loading="lazy" sandbox="allow-same-origin"></iframe>
+          </div>
+        </div>
         <div>
           <h3>Minimal Portfolio</h3>
           <div class="meta">Whitespace, sharp type, and focus on the work itself.</div>
@@ -506,7 +567,11 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
       </div>
 
       <div class="card pixel-corners" data-name="Simple Landing Page" data-cat="Minimal">
-        <div class="thumb"><small>simple-landing/</small></div>
+        <div class="thumb" data-path="simple-landing/index.html">
+          <div class="mini-wrap">
+            <iframe class="mini-frame" title="Simple Landing Page (thumb)" loading="lazy" sandbox="allow-same-origin"></iframe>
+          </div>
+        </div>
         <div>
           <h3>Simple Landing Page</h3>
           <div class="meta">Single column, large headline, straight to the point.</div>
@@ -521,7 +586,11 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
       </div>
 
       <div class="card pixel-corners" data-name="Plain Blog" data-cat="Minimal">
-        <div class="thumb"><small>plain-blog/</small></div>
+        <div class="thumb" data-path="plain-blog/index.html">
+          <div class="mini-wrap">
+            <iframe class="mini-frame" title="Plain Blog (thumb)" loading="lazy" sandbox="allow-same-origin"></iframe>
+          </div>
+        </div>
         <div>
           <h3>Plain Blog</h3>
           <div class="meta">Text-first, muted palette, classic reading rhythm.</div>
@@ -536,7 +605,11 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
       </div>
 
       <div class="card pixel-corners" data-name="Simple Search Engine" data-cat="Minimal">
-        <div class="thumb"><small>search-engine-simple/</small></div>
+        <div class="thumb" data-path="search-engine-simple/index.html">
+          <div class="mini-wrap">
+            <iframe class="mini-frame" title="Simple Search Engine (thumb)" loading="lazy" sandbox="allow-same-origin"></iframe>
+          </div>
+        </div>
         <div>
           <h3>Basic Search Engine</h3>
           <div class="meta">Just a search bar with your logo.</div>
@@ -552,7 +625,11 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
 
       <!-- RETRO -->
       <div class="card pixel-corners" data-name="Geocities Revival" data-cat="Retro">
-        <div class="thumb"><small>geocities-revival/</small></div>
+        <div class="thumb" data-path="geocities-revival/index.html">
+          <div class="mini-wrap">
+            <iframe class="mini-frame" title="Geocities Revival (thumb)" loading="lazy" sandbox="allow-same-origin"></iframe>
+          </div>
+        </div>
         <div>
           <h3>Geocities Revival</h3>
           <div class="meta">Hand-coded 90s vibes: tiled bg, bold links, and fun extras.</div>
@@ -567,7 +644,11 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
       </div>
 
       <div class="card pixel-corners" data-name="Corporate 2000s" data-cat="Retro">
-        <div class="thumb"><small>corporate-xp/</small></div>
+        <div class="thumb" data-path="corporate-xp/index.html">
+          <div class="mini-wrap">
+            <iframe class="mini-frame" title="Corporate 2000s (thumb)" loading="lazy" sandbox="allow-same-origin"></iframe>
+          </div>
+        </div>
         <div>
           <h3>Corporate 2000s</h3>
           <div class="meta">XP-era gradients and beveled touches — early-2000s corporate feel.</div>
@@ -582,7 +663,11 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
       </div>
 
       <div class="card pixel-corners" data-name="Pixel Arcade" data-cat="Retro">
-        <div class="thumb"><small>pixel-arcade/</small></div>
+        <div class="thumb" data-path="pixel-arcade/index.html">
+          <div class="mini-wrap">
+            <iframe class="mini-frame" title="Pixel Arcade (thumb)" loading="lazy" sandbox="allow-same-origin"></iframe>
+          </div>
+        </div>
         <div>
           <h3>Pixel Arcade</h3>
           <div class="meta">Pixel fonts, neon vibes, and grid accents for playful projects.</div>
@@ -594,10 +679,14 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
             <a class="btn" href="pixel-arcade/" target="_blank" rel="noopener">Open Folder</a>
           </div>
         </div>
-      </div>pixel-arcade
+      </div>
 
       <div class="card pixel-corners" data-name="Search Engine with Ads" data-cat="Retro">
-        <div class="thumb"><small>search-engine-ads/</small></div>
+        <div class="thumb" data-path="search-engine-ads/index.html">
+          <div class="mini-wrap">
+            <iframe class="mini-frame" title="Search Engine with Ads (thumb)" loading="lazy" sandbox="allow-same-origin"></iframe>
+          </div>
+        </div>
         <div>
           <h3>Search Engine with Ads</h3>
           <div class="meta">Search bar with ads blocks, local and world news, and weather.</div>
@@ -686,6 +775,34 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
   const BASE = repoBase();
   const resolveFromRepo = (path) => new URL(path, BASE).href;
 
+  // --- Mini preview thumbnails (lazy) ---
+  function hydrateThumbs(){
+    const thumbs = document.querySelectorAll('.thumb');
+
+    // If a thumb is missing data-path, derive it from its card's Preview button
+    thumbs.forEach(t => {
+      if(!t.dataset.path){
+        const btn = t.closest('.card')?.querySelector('.btn.primary[data-path]');
+        if(btn) t.dataset.path = btn.getAttribute('data-path');
+      }
+    });
+
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if(!entry.isIntersecting) return;
+        const el = entry.target;
+        const path = el.dataset.path;
+        const frame = el.querySelector('iframe.mini-frame');
+        if(frame && !frame.src && path){
+          frame.src = resolveFromRepo(path);
+        }
+        obs.unobserve(el);
+      });
+    }, { rootMargin: '200px' });
+
+    thumbs.forEach(t => io.observe(t));
+  }
+
   // --- Filtering & search ---
   const chips = document.querySelectorAll('.chip');
   const catalog = document.getElementById('catalog');
@@ -711,7 +828,7 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
   }));
   search.addEventListener('input', applyFilters);
 
-  // --- Preview wiring (now repo-root safe) ---
+  // --- Preview wiring (repo-root safe) ---
   const iframe = document.getElementById('preview');
   const label = document.getElementById('previewLabel');
   const quickSelect = document.getElementById('quickSelect');
@@ -751,6 +868,7 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
 
   // Initial state
   applyFilters();
+  hydrateThumbs(); // hydrate the mini previews
   setPreview('corporate-xp/index.html', 'Corporate 2000s');
 </script>
 </body>
