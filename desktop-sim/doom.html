@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DOOM (js-dos)</title>
+  <style>
+    :root {
+      --accent: #3fa7ff;
+      --bg1: #0e1a2b;
+      --bg2: #0a1320;
+      --panel: #0f1f36;
+      --text: #dfe8ff;
+      --muted: #9db3d8;
+      --shadow: rgba(0,0,0,.45);
+      /* Default canvas size (keeps 16:10 aspect so 320x200 scales cleanly) */
+      --game-w: 960px;
+      --game-h: 600px;
+    }
+
+    /* Center everything */
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: radial-gradient(1200px 700px at 50% -10%, var(--bg1), var(--bg2) 60%, #050a14 100%);
+      color: var(--text);
+      font-family: system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
+    body {
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    /* Card */
+    .card {
+      width: min(98vw, calc(var(--game-w) + 32px));
+      box-shadow: 0 30px 60px var(--shadow), 0 0 0 1px rgba(255,255,255,.05) inset;
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    h1 {
+      font-size: clamp(18px, 2.4vw, 22px);
+      margin: 0 0 10px;
+      letter-spacing: .3px;
+      color: var(--text);
+    }
+    .muted {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Control bar */
+    .bar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin: 8px 0 14px;
+      padding: 8px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 10px;
+    }
+    button {
+      appearance: none;
+      border: 1px solid rgba(255,255,255,.18);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      color: var(--text);
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px var(--shadow);
+    }
+    button:hover { filter: brightness(1.08); }
+    button:active { transform: translateY(1px); }
+
+    .status {
+      margin-left: auto;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* js-dos area */
+    .stage {
+      width: 100%;
+      display: grid;
+      place-items: center;
+    }
+    /* Size the emulator container via CSS variables */
+    .dosbox-container {
+      width: var(--game-w);
+      height: var(--game-h);
+      max-width: 98vw;
+      max-height: calc(98vh - 180px);
+      background: #000;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.1);
+    }
+    .dosbox-container > .dosbox-overlay {
+      background: url(https://js-dos.com/cdn/DOOM.png) center / cover no-repeat;
+    }
+
+    /* Responsive downscale if viewport is small */
+    @media (max-width: 1100px) {
+      :root {
+        --game-w: 800px;
+        --game-h: 500px;
+      }
+    }
+    @media (max-width: 860px) {
+      :root {
+        --game-w: 640px;
+        --game-h: 400px;
+      }
+    }
+    @media (max-width: 700px) {
+      :root {
+        --game-w: 480px;
+        --game-h: 300px;
+      }
+    }
+    @media (max-width: 520px) {
+      :root {
+        --game-w: 360px;
+        --game-h: 225px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="row">
+      <h1>DOOM (shareware)</h1>
+      <div class="muted">Tip: Press <kbd>F</kbd> or <kbd>Alt+Enter</kbd> for fullscreen</div>
+    </div>
+
+    <div class="bar">
+      <button id="btnRun">▶ Launch</button>
+      <button id="btnFull">⤢ Fullscreen</button>
+      <button id="btnReset">↻ Reset</button>
+      <span id="status" class="status">Ready</span>
+    </div>
+
+    <div class="stage">
+      <div id="dosbox"></div>
+    </div>
+  </div>
+
+  <!-- js-dos API -->
+  <script src="https://js-dos.com/cdn/js-dos-api.js"></script>
+  <script>
+    // Configure your package + mount dir here:
+    const PKG = "upload/DOOM-@evilution.zip";
+    const MOUNT = "./doom";
+
+    // Keep dosbox in outer scope so buttons/shortcuts work.
+    let dosbox = null;
+    const statusEl = document.getElementById("status");
+    const el = document.getElementById("dosbox");
+
+    function setStatus(msg){ statusEl.textContent = msg; }
+
+    function ensureDosbox(){
+      if (dosbox) return dosbox;
+      dosbox = new Dosbox({
+        id: "dosbox",
+        onload: function (db) {
+          setStatus("Loaded. Click Launch to run.");
+        },
+        onrun: function (db, app) {
+          setStatus("Running: " + app);
+        }
+      });
+      return dosbox;
+    }
+
+    async function runGame(){
+      try{
+        ensureDosbox();
+        setStatus("Starting …");
+        dosbox.run(PKG, MOUNT);
+      }catch(err){
+        console.error(err);
+        setStatus("Error launching game");
+      }
+    }
+
+    function goFullscreen(){
+      try{
+        ensureDosbox();
+        dosbox.requestFullScreen();
+      }catch(err){
+        console.error(err);
+        setStatus("Fullscreen not available");
+      }
+    }
+
+    function resetGame(){
+      try{
+        if (dosbox) {
+          dosbox.stop();
+          setStatus("Stopped. Click Launch to run again.");
+        }
+      }catch(err){
+        console.error(err);
+        setStatus("Error stopping");
+      }
+    }
+
+    // Wire buttons
+    document.getElementById("btnRun").addEventListener("click", runGame);
+    document.getElementById("btnFull").addEventListener("click", goFullscreen);
+    document.getElementById("btnReset").addEventListener("click", resetGame);
+
+    // Keyboard shortcuts
+    // F => fullscreen, Alt+Enter => fullscreen, R => reset, L => launch
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "F" || e.key === "f") { e.preventDefault(); goFullscreen(); }
+      if ((e.key === "Enter" && e.altKey) || (e.key === "F11")) { e.preventDefault(); goFullscreen(); }
+      if (e.key === "r" || e.key === "R") { resetGame(); }
+      if (e.key === "l" || e.key === "L") { runGame(); }
+    });
+
+    // Auto-initialize so the container appears styled even before launch
+    ensureDosbox();
+  </script>
+</body>
+</html>

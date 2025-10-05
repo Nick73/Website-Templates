@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Windows Experience</title>
+  <link rel="icon" href="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a64ad'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' dominant-baseline='middle' font-size='30' fill='white' font-family='Segoe UI, Arial, sans-serif'%3EXP%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="xp">
+  <audio id="bootAudio" src="assets/xp-startup.mp3" preload="auto"></audio>
+
+  <!-- LOGON SCREEN -->
+  <div id="logon" class="logon">
+    <div class="logon-shell">
+      <section class="logon-info">
+        <h1>Welcome</h1>
+        <p>This is a browser-based desktop. Click the Administrator user to log on.</p>
+        <ul>
+          <li>Two themes: XP Luna &amp; Windows 2000</li>
+          <li>Apps: Browser, Notepad, Explorer, DOOM</li>
+          <li>Tip: Try <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>A</kbd></li>
+        </ul>
+        <small>Provide your own wallpaper at <code>assets/bliss.jpeg</code>.</small>
+      </section>
+      <section class="logon-user">
+        <button id="userBtn" class="user-tile">
+          <img alt="" src="assets/user.png" />
+          <span>Administrator</span>
+        </button>
+        <div class="logon-hint">Click to log on</div>
+      </section>
+    </div>
+    <div class="logon-foot">© You</div>
+  </div>
+
+  <!-- DESKTOP -->
+  <div id="desktop" class="desktop hide">
+    <div class="wallpaper"></div>
+
+    <!-- Icons -->
+    <div class="icons">
+      <button class="icon" data-open="browser" title="Web Browser">
+        <img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Ccircle cx='24' cy='24' r='20' fill='%231b75c7'/%3E%3Cg fill='%23fff'%3E%3Cpath d='M12 24h24M24 12v24'/%3E%3Ccircle cx='24' cy='24' r='4'/%3E%3C/g%3E%3C/svg%3E">
+        <span>Browser</span>
+      </button>
+      <button class="icon" data-open="explorer" title="File Browser">
+        <img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cpath d='M6 40V14a4 4 0 0 1 4-4h14l6 6h14a4 4 0 0 1 4 4v20a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4z' fill='%23ffe08a' stroke='%23b8891f'/%3E%3C/svg%3E">
+        <span>Explorer</span>
+      </button>
+      <button class="icon" data-open="notepad" title="Notepad">
+        <img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Crect x='8' y='6' width='32' height='36' rx='4' fill='%23ffffff' stroke='%2399b'/%3E%3Cpath d='M12 14h24M12 20h24M12 26h24M12 32h24' stroke='%2396a3c7'/%3E%3C/svg%3E">
+        <span>Notepad</span>
+      </button>
+      <button class="icon" data-open="doom" title="DOOM">
+        <img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Crect width='40' height='28' x='4' y='10' rx='4' fill='%23000' stroke='%23555'/%3E%3Ctext x='24' y='28' fill='%23ff742e' font-size='10' text-anchor='middle' font-family='monospace'%3EDOOM%3C/text%3E%3C/svg%3E">
+        <span>DOOM</span>
+      </button>
+      <button class="icon hot-corner" title=" ">
+        <img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Ccircle cx='24' cy='24' r='6' fill='rgba(0,0,0,0)'/%3E%3C/svg%3E">
+        <span>&nbsp;</span>
+      </button>
+    </div>
+
+    <!-- Browser Window -->
+    <div class="win hide" id="win-browser" data-win="browser" style="top: 10vh; left: 12vw; width:min(940px,94vw)">
+      <div class="titlebar" data-drag-handle>
+        <div class="title">Web Browser</div>
+        <div class="controls">
+          <div class="btn min" data-glyph="–" onclick="minimize('browser')" title="Minimize"></div>
+          <div class="btn max" data-glyph="□" onclick="centerWin('browser')" title="Center"></div>
+          <div class="btn close" data-glyph="×" onclick="closeWin('browser')" title="Close"></div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="browser-chrome">
+          <button class="nav-btn" onclick="browserReload()" title="Reload">↻</button>
+          <input id="addressBar" value="geocities.html" spellcheck="false" />
+          <button class="go-btn" onclick="browserGo()">Go</button>
+          <span class="browser-status" id="browserStatus">Ready</span>
+        </div>
+        <iframe id="webView" src="geocities.html" class="webview" title="WebView"></iframe>
+        <div class="smallprint">Note: For security, this browser only loads <code>geocities.html</code> (same-site).</div>
+      </div>
+    </div>
+
+    <!-- Explorer -->
+    <div class="win hide" id="win-explorer" data-win="explorer" style="top: 16vh; left: 20vw; width:min(820px,92vw)">
+      <div class="titlebar" data-drag-handle>
+        <div class="title">Explorer</div>
+        <div class="controls">
+          <div class="btn min" data-glyph="–" onclick="minimize('explorer')" title="Minimize"></div>
+          <div class="btn max" data-glyph="□" onclick="centerWin('explorer')" title="Center"></div>
+          <div class="btn close" data-glyph="×" onclick="closeWin('explorer')" title="Close"></div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="explorer">
+          <aside class="nav">
+            <button onclick="explorerOpen('C:/')">Local Disk (C:)</button>
+            <button onclick="explorerOpen('Documents')">Documents</button>
+            <button onclick="explorerOpen('Pictures')">Pictures</button>
+            <button onclick="explorerOpen('Games')">Games</button>
+            <button onclick="openWin('browser')">Web (geocities.html)</button>
+          </aside>
+          <section class="pane" id="explorerPane">
+            <p>Select a location.</p>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notepad -->
+    <div class="win hide" id="win-notepad" data-win="notepad" style="top: 22vh; left: 28vw; width:min(700px,92vw)">
+      <div class="titlebar" data-drag-handle>
+        <div class="title">Notepad</div>
+        <div class="controls">
+          <div class="btn min" data-glyph="–" onclick="minimize('notepad')" title="Minimize"></div>
+          <div class="btn max" data-glyph="□" onclick="centerWin('notepad')" title="Center"></div>
+          <div class="btn close" data-glyph="×" onclick="closeWin('notepad')" title="Close"></div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="notepad">
+          <textarea id="pad" placeholder="Type notes here…"></textarea>
+          <div class="pad-bar">
+            <button class="btn-pill" onclick="padSave()">Save</button>
+            <button class="btn-pill" onclick="padLoad()">Load</button>
+            <span class="smallprint">Saved to your browser only.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOOM -->
+<div class="win hide" id="win-doom" data-win="doom" style="top: 12vh; left: 12vw; width: min(900px, 92vw);">
+  <div class="titlebar" data-drag-handle>
+    <div class="title">Arcade — DOOM</div>
+    <div class="controls">
+      <div class="btn min" data-glyph="–" onclick="minimize('doom')" title="Minimize"></div>
+      <div class="btn max" data-glyph="□" onclick="centerWin('doom')" title="Center"></div>
+      <div class="btn close" data-glyph="×" onclick="closeWin('doom')" title="Close"></div>
+    </div>
+  </div>
+  <div class="content" style="padding:0;">
+    <!-- Embed your doom.html page directly -->
+    <iframe 
+      src="doom.html"
+      title="DOOM"
+      style="width:100%; height:70vh; border:0;"
+      allowfullscreen
+      allow="fullscreen; autoplay; gamepad"
+    ></iframe>
+  </div>
+</div>
+
+    <!-- Hidden About -->
+    <div class="win hide" id="win-about" data-win="about" style="top: 18vh; left: 36vw; width:min(640px,92vw)">
+      <div class="titlebar" data-drag-handle>
+        <div class="title">About This Site</div>
+        <div class="controls">
+          <div class="btn min" data-glyph="–" onclick="minimize('about')" title="Minimize"></div>
+          <div class="btn max" data-glyph="□" onclick="centerWin('about')" title="Center"></div>
+          <div class="btn close" data-glyph="×" onclick="closeWin('about')" title="Close"></div>
+        </div>
+      </div>
+      <div class="content">
+        <p>Hi! You found the Easter egg. Customize this content under <code>#win-about</code>.</p>
+      </div>
+    </div>
+
+    <!-- Taskbar -->
+    <div class="taskbar" id="taskbar">
+      <div class="start pix" id="startBtn" onclick="toggleStart()">Start</div>
+      <div class="task-items" id="tasks"></div>
+      <div class="spacer"></div>
+      <div class="tray">
+        <select id="themeSelect" title="Theme">
+          <option value="xp">XP</option>
+          <option value="w2k">Windows 2000</option>
+        </select>
+        <span id="clock">--:-- --</span>
+      </div>
+    </div>
+
+    <!-- Start menu -->
+    <div id="startMenu" class="hide startmenu">
+      <div class="startmenu-title">Start</div>
+      <div class="startmenu-body">
+        <button onclick="openWin('browser')">Browser</button>
+        <button onclick="openWin('explorer')">Explorer</button>
+        <button onclick="openWin('notepad')">Notepad</button>
+        <button onclick="openWin('doom')">DOOM</button>
+        <hr/>
+        <button onclick="logout()">Log Off</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+/* XP & Win2000 themed desktop + simple web browser window */
+:root{
+  --xp-blue-top:#1b75c7; --xp-blue-bot:#0f5eac;
+  --xp-accent:#58a0e0; --xp-border:#3d6ca4; --xp-cream:#e6f1ff;
+  --taskbar-bg1:#0d6cc0; --taskbar-bg2:#0b5aa3; --taskbar-border:#0e4a86;
+  --w2k-title:#000080; --w2k-titlegrad:#1b3e8a; --w2k-face:#d4d0c8;
+  --start-text:#043c0f; --text:#061a3a; --desk-text:#fff;
+}
+
+html, body {height:100%; margin:0; font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;}
+.hide{ display:none }
+
+body[data-theme="xp"]{
+  --titlebar-grad: linear-gradient(var(--xp-blue-top), var(--xp-blue-bot));
+  --titlebar-text:#fff;
+  --button-min: linear-gradient(#ffe681,#ffd24a);
+  --button-max: linear-gradient(#a2e39a,#6ccd66);
+  --button-close: linear-gradient(#ff8f8f,#e35f5f);
+  --window-bg:#f0f6ff;
+  --taskbar-grad: linear-gradient(var(--taskbar-bg1), var(--taskbar-bg2));
+  --taskbar-border-color: var(--taskbar-border);
+  --wallpaper: url('assets/bliss.jpeg'), linear-gradient(160deg, #4aa3ff, #1c7bd9 60%, #0a64ad);
+  --start-bg: linear-gradient(#3fd25a,#2aa842);
+  --start-border:#0c5c28;
+  --start-radius:10px;
+  --start-color:#043c0f;
+}
+
+body[data-theme="w2k"]{
+  --titlebar-grad: linear-gradient(var(--w2k-title), var(--w2k-titlegrad));
+  --titlebar-text:#fff;
+  --button-min: linear-gradient(#f2f2f2,#c9c9c9);
+  --button-max: linear-gradient(#f2f2f2,#c9c9c9);
+  --button-close: linear-gradient(#f2f2f2,#c9c9c9);
+  --window-bg: var(--w2k-face);
+  --taskbar-grad: linear-gradient(#c0c0c0, #a0a0a0);
+  --taskbar-border-color: #7a7a7a;
+  --wallpaper: url('assets/bliss.jpeg'), linear-gradient(160deg, #6f8db5, #4f6a8b 60%, #2d4766);
+  --start-bg: linear-gradient(#d0d0d0,#bcbcbc);
+  --start-border:#7a7a7a;
+  --start-radius:4px;
+  --start-color:#000;
+}
+
+.desktop{ position:relative; height:100vh; overflow:hidden; }
+.wallpaper{ position:fixed; inset:0; background: var(--wallpaper); background-size: cover; background-position: center; z-index:0; }
+
+/* Logon */
+.logon{ position:fixed; inset:0; background: radial-gradient(circle at 50% 35%, #5fb8ff, #0f5eac 60%, #093f79); display:grid; place-items:center; color:#fff; }
+.logon-shell{ width:min(960px, 94vw); min-height: 360px; display:grid; grid-template-columns: 1fr 1fr; gap:24px; background: rgba(0,0,0,.15); padding:24px; border-radius:16px; box-shadow: 0 10px 30px rgba(0,0,0,.3); }
+.logon-info h1{ margin:0 0 8px } .logon-info p{ margin:0 0 8px } .logon-info ul{ margin:10px 0 0 18px }
+.logon-user{ display:grid; place-items:center; }
+.user-tile{ display:inline-grid; gap:10px; grid-auto-flow:row; justify-items:center; padding:16px 20px; border-radius:14px; background:linear-gradient(#f0fbff,#cde7ff); border:2px solid #8dc4ff; cursor:pointer; }
+.user-tile img{ width:120px; height:120px; border-radius:18px; object-fit: cover; }
+.user-tile span{ font-weight:800; color:#063b79; }
+.logon-hint{ opacity:.9; margin-top:10px }
+.logon-foot{ opacity:.65; margin-top:12px; font-size:12px }
+
+/* Icons */
+.icons{ position:absolute; top:20px; left:16px; z-index:1; display:grid; grid-template-columns: repeat(1, 96px); gap:18px; }
+.icon{ width:96px; display:grid; justify-items:center; gap:6px; background:none; border:none; cursor:default; color: var(--desk-text); text-shadow: 0 1px 2px rgba(0,0,0,.6); }
+.icon img{ width:48px; height:48px; }
+.icon:active span, .icon:focus span{ background: rgba(0,0,0,.2); outline:2px solid #8dc4ff; border-radius:6px; }
+.hot-corner{ opacity:0; pointer-events:auto; }
+
+/* Windows */
+.win{ position:absolute; z-index:2; width:min(760px, 90vw); max-height:70vh; border:2px solid #2c4e87; background: var(--window-bg); color: #061a3a; border-radius:8px; overflow:hidden; box-shadow: 0 8px 26px rgba(0,0,0,.45); }
+.titlebar{ display:flex; align-items:center; justify-content:space-between; padding:6px 10px; background: var(--titlebar-grad); color: var(--titlebar-text); text-shadow: 0 1px 0 rgba(0,0,0,.4); user-select:none; cursor:move; box-shadow: inset 0 1px 0 rgba(255,255,255,.45); }
+.title{ font-weight:700; pointer-events:none; }
+.controls{ display:flex; gap:6px; }
+.btn{ width:22px; height:22px; border-radius:3px; border:1px solid rgba(0,0,0,.35); display:grid; place-items:center; cursor:pointer; box-shadow: inset 0 1px 0 rgba(255,255,255,.65); font-weight:900; line-height:1; color:#092a52; }
+.btn.min{ background: var(--button-min); } .btn.max{ background: var(--button-max); } .btn.close{ background: var(--button-close); color:#3a0d0d; }
+.btn:hover{ filter: brightness(1.05); } .btn:active{ box-shadow: inset 0 2px 3px rgba(0,0,0,.25); transform: translateY(1px); }
+.btn::before{ content: attr(data-glyph); transform: translateY(-1px); }
+.content{ padding:10px; overflow:auto; max-height:calc(70vh - 42px); }
+
+/* Browser chrome */
+.browser-chrome{ display:flex; align-items:center; gap:8px; padding:6px; border:1px solid #9dbce7; border-radius:8px; background:#e8f1ff; margin-bottom:8px }
+.browser-chrome input{ flex:1 1 auto; padding:6px 8px; border:1px solid #b5c8ea; border-radius:6px; background:#fff; }
+.nav-btn, .go-btn{ padding:6px 10px; border-radius:6px; border:1px solid #9dbce7; background:#dceaff; cursor:pointer; }
+.browser-status{ margin-left:auto; font-size:12px; opacity:.7 }
+.webview{ width:100%; min-height:420px; border:1px solid #b5c8ea; border-radius:8px; background:#fff }
+
+/* Explorer */
+.explorer{ display:grid; grid-template-columns: 220px 1fr; gap:12px; }
+.explorer .nav{ display:grid; align-content:start; gap:8px; background:#f3f7ff; border:1px solid #b5c8ea; padding:8px; border-radius:8px; }
+.explorer .nav button{ text-align:left; padding:8px; border-radius:6px; border:1px solid #9dbce7; background:#e8f1ff; cursor:pointer; }
+.explorer .pane{ border:1px solid #b5c8ea; border-radius:8px; padding:10px; background:#fff; min-height:220px; }
+
+/* Notepad */
+.notepad{ display:grid; gap:8px }
+#pad{ width:100%; min-height:240px; resize:vertical; font-family: Consolas, Menlo, Monaco, monospace; font-size:14px; }
+.pad-bar{ display:flex; align-items:center; gap:8px }
+.btn-pill{ border:2px solid #7cb1ff; border-radius:999px; padding:6px 12px; background:rgba(28,54,100,.1); color:#0a2b57; font-weight:800; text-decoration:none; cursor:pointer }
+
+/* Taskbar */
+.taskbar{ position:fixed; left:0; right:0; bottom:0; height:42px; display:none; align-items:center; gap:8px; padding:4px 8px; background: var(--taskbar-grad); border-top:2px solid var(--taskbar-border-color); box-shadow:0 -1px 0 rgba(255,255,255,.35) inset; z-index:5; }
+.taskbar.show{display:flex}
+.start{ display:flex; align-items:center; gap:8px; border-radius: var(--start-radius); background: var(--start-bg); padding:6px 14px; color: var(--start-color); font-weight:700; border:1px solid var(--start-border); cursor:pointer; text-shadow:0 1px 0 rgba(255,255,255,.5); }
+.task-items{ display:flex; gap:6px; overflow:auto; }
+.task-btn{ min-width:160px; max-width:260px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; padding:6px 10px; border-radius:6px; background:linear-gradient(#e6f1ff,#b9d3f5); color:#0a2b57; border:1px solid #5786c2; box-shadow:inset 0 1px 0 #fff; cursor:pointer; }
+.spacer{ flex:1 1 auto; }
+.tray{ display:flex; align-items:center; gap:10px; padding:3px 8px; border-radius:6px; background: linear-gradient(#dfefff,#c3dbfa); color:#0a2b57; border:1px solid #6c95c8; box-shadow: inset 0 1px 0 #fff; font-weight:700; }
+#clock{ font-variant-numeric: tabular-nums; white-space:nowrap; }
