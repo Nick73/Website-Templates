@@ -1,0 +1,11 @@
+<!--
+SPDX-License-Identifier: MPL-2.0
+Copyright (c) 2025 Nick Chiar…
+-->
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>Lumen</ShortName>
+  <Description>Simple search with provider shortcuts.</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <!-- Default to DuckDuckGo -->
+  <Url type="text/html" method="get" template="https://duckduckgo.com/?q={searchTerms}"/>
+</OpenSearchDescription>

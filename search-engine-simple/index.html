@@ -1,0 +1,73 @@
+<!--
+SPDX-License-Identifier: MPL-2.0
+Copyright (c) 2025 Nick Chiaravalle
+
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+If a copy of the MPL was not distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/.
+-->
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lumen • Simple Search</title>
+  <meta name="description" content="Lumen: a super-simple search page with provider shortcuts and tiny useful tricks." />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css" />
+  <!-- Optional: enable “Add Search Engine” in some browsers -->
+  <link rel="search" type="application/opensearchdescription+xml" title="Lumen Search" href="opensearch.xml" />
+</head>
+<body>
+  <main class="wrap" role="main">
+    <!-- Logo -->
+    <a class="logo" href="." aria-label="Lumen Home">
+      <!-- unique angled wordmark -->
+      <svg viewBox="0 0 240 40" width="240" height="40" aria-hidden="true">
+        <defs>
+          <linearGradient id="g" x1="0" x2="1">
+            <stop offset="0" stop-color="#7dd3fc"/><stop offset="1" stop-color="#a78bfa"/>
+          </linearGradient>
+        </defs>
+        <path d="M10 30 V10 h8 v14 h16 v6z" fill="url(#g)"/>
+        <path d="M48 30 V10 h8 v20zM60 30 V10 h22v6h-14v2h12v6h-12v2h14v4z" fill="url(#g)"/>
+        <path d="M94 30 V10 h8v14h10V10h8v20z" fill="url(#g)"/>
+        <path d="M130 30 V10 h8l10 12 10-12h8v20h-8V20l-10 11-10-11v10z" fill="url(#g)"/>
+        <circle cx="208" cy="12" r="3" fill="#7dd3fc"/>
+        <rect x="198" y="18" width="22" height="8" rx="2" fill="url(#g)"/>
+      </svg>
+    </a>
+
+    <!-- Search -->
+    <form id="searchForm" class="search" role="search" aria-label="Lumen search">
+      <input id="q" class="q" type="search" autocomplete="off" spellcheck="false"
+             placeholder="Search…  (try g: rust ownership, 23*(4+5), # for filters)" aria-label="Search input" />
+      <button class="go" type="submit" title="Search">↵</button>
+      <button class="mode" type="button" id="modeBtn" aria-label="Toggle theme">☾</button>
+    </form>
+
+    <!-- Inline result (for quick math) -->
+    <div id="inlineResult" class="inline hidden" aria-live="polite"></div>
+
+    <!-- Helper chips (appear when # is typed or input focused & empty) -->
+    <div id="chips" class="chips hidden" role="list">
+      <button type="button" class="chip" data-insert="site:example.com">site:example.com</button>
+      <button type="button" class="chip" data-insert="filetype:pdf">filetype:pdf</button>
+      <button type="button" class="chip" data-insert='"exact phrase"'>"exact phrase"</button>
+      <button type="button" class="chip" data-insert="after:2024-01-01">after:2024-01-01</button>
+      <button type="button" class="chip" data-insert="before:2025-01-01">before:2025-01-01</button>
+    </div>
+
+    <!-- Footer help -->
+    <footer class="help">
+      <div>
+        Shortcuts: <code>g:</code> Google • <code>ddg:</code> DuckDuckGo • <code>b:</code> Bing •
+        <code>w:</code> Wikipedia • <code>yt:</code> YouTube • <code>img:</code> Images • <code>maps:</code> Maps
+      </div>
+      <div>Keys: <code>/</code> focus • <code>Esc</code> clear • <code>Tab</code> accept inline result</div>
+      <div class="license"><a href="../..//LICENSE">MPL-2.0</a></div>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
