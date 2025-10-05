@@ -5,3 +5,188 @@ Copyright (c) 2025 Nick Chiaravalle
 This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
 If a copy of the MPL was not distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/.
 -->
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0f1a34" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<title>Corporate Landing • Classic</title>
+<meta name="description" content="A classic corporate landing page: hero, trust, features, benefits, testimonial, CTA, and contact. Mobile-first and accessible." />
+<link rel="icon" href="img/mark.svg" type="image/svg+xml">
+<link rel="preload" as="image" href="img/hero-chart.svg">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- ===== Header ===== -->
+  <header class="topbar" role="banner">
+    <div class="wrap bar">
+      <a class="brand" href="#" aria-label="Home">
+        <img class="brand-mark" src="img/mark.svg" alt="" aria-hidden="true" width="28" height="28">
+        <span class="brand-name">Corp<span class="accent">Classic</span></span>
+      </a>
+
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav" id="navToggle">
+        <span class="bars" aria-hidden="true"></span>
+        <span class="nav-label">Menu</span>
+      </button>
+
+      <nav id="nav" class="nav" aria-label="Primary">
+        <a href="#features">Features</a>
+        <a href="#benefits">Benefits</a>
+        <a href="#customers">Customers</a>
+        <a href="#contact" class="btn small">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero" id="top" aria-label="Intro">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1>Clear value. Classic polish.</h1>
+        <p class="lede">Launch a credible corporate presence with a fast, accessible landing page that looks great on every device.</p>
+        <div class="actions">
+          <a href="#contact" class="btn">Talk to sales</a>
+          <a href="#features" class="btn ghost">See features</a>
+        </div>
+        <ul class="points" role="list">
+          <li>Enterprise-ready markup</li>
+          <li>Mobile-first, no framework</li>
+          <li>Easy to customize</li>
+        </ul>
+      </div>
+      <div class="hero-art">
+        <img src="img/hero-chart.svg" alt="" width="880" height="560" loading="eager" decoding="async">
+      </div>
+    </div>
+  </section>
+
+  <main id="main">
+    <!-- ===== Trust ===== -->
+    <section class="trust">
+      <div class="wrap">
+        <p class="trust-label">Trusted by teams like</p>
+        <ul class="trust-logos" role="list">
+          <li><img src="img/logo1.svg" alt="Acme"></li>
+          <li><img src="img/logo2.svg" alt="Globex"></li>
+          <li><img src="img/logo3.svg" alt="Umbrella"></li>
+          <li><img src="img/logo4.svg" alt="Initech"></li>
+          <li><img src="img/logo5.svg" alt="Hooli"></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== Features ===== -->
+    <section id="features" class="section">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>Features</h2>
+          <p>Essential sections and patterns for classic corporate sites.</p>
+        </header>
+        <div class="cards-3">
+          <article class="card feat">
+            <h3>Hero & CTA</h3>
+            <p>Bold headline and clear call-to-action above the fold.</p>
+            <ul><li>Accessible heading structure</li><li>Responsive buttons</li></ul>
+          </article>
+          <article class="card feat">
+            <h3>Trust & Proof</h3>
+            <p>Logo row + testimonial quote establish credibility fast.</p>
+            <ul><li>Role-based alt text</li><li>Balanced contrast</li></ul>
+          </article>
+          <article class="card feat">
+            <h3>Lead Capture</h3>
+            <p>Simple contact form with mobile-friendly inputs.</p>
+            <ul><li>44px touch targets</li><li>Validation ready</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Benefits ===== -->
+    <section id="benefits" class="section alt">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>Why it works</h2>
+          <p>Timeless structure, modern performance.</p>
+        </header>
+        <div class="benefit-grid">
+          <article class="benefit card">
+            <h3>Fast by default</h3>
+            <p>Zero dependencies, optimized media, and clean CSS.</p>
+          </article>
+          <article class="benefit card">
+            <h3>Brand-friendly</h3>
+            <p>Swap colors, logos, and copy in minutes.</p>
+          </article>
+          <article class="benefit card">
+            <h3>Extensible</h3>
+            <p>Add sections (careers, investors, press) without rework.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Testimonial / Customers ===== -->
+    <section id="customers" class="section">
+      <div class="wrap">
+        <div class="quote card">
+          “Launch day was painless and the site looks great on every device.”
+          <cite>— Taylor M., Operations</cite>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA band ===== -->
+    <section class="cta">
+      <div class="wrap cta-inner">
+        <h2>Ready to launch?</h2>
+        <p>We’ll tailor this starter to your brand and ship quickly.</p>
+        <a href="#contact" class="btn">Talk to sales</a>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section id="contact" class="section alt">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>Contact sales</h2>
+          <p>Tell us about your needs — we’ll reply within a business day.</p>
+        </header>
+        <form class="form" onsubmit="event.preventDefault(); this.reset(); alert('Thanks! We will be in touch.');">
+          <div class="row">
+            <label>Full name<input required autocomplete="name"></label>
+            <label>Email<input type="email" required autocomplete="email"></label>
+          </div>
+          <label>Company<input autocomplete="organization"></label>
+          <label>Message<textarea rows="5" placeholder="Timeline, scope, links…"></textarea></label>
+          <button class="btn" type="submit">Send</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer" role="contentinfo">
+    <div class="wrap foot">
+      <div>© 2025 CorpClassic</div>
+      <nav aria-label="Footer">
+        <a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="../..//LICENSE">MPL-2.0</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Mobile sticky actions -->
+  <div class="sticky-actions" role="navigation" aria-label="Quick actions">
+    <a class="fab" href="#contact" aria-label="Contact">✉️ Contact</a>
+    <a class="fab" href="tel:+15551234567" aria-label="Call">📞 Call</a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
